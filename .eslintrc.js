@@ -35,6 +35,7 @@ module.exports = {
     ],
     'quote-props': ['error', 'as-needed'],
     semi: ['error', 'never'],
+    'space-before-function-paren': ['error', 'never'],
     // vue
     'vue/html-closing-bracket-newline': [
       'error',
