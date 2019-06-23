@@ -20,7 +20,11 @@ export default [
       {
         path: '/login',
         name: 'login',
-        component: Login
+        component: Login,
+        meta: {
+          auth: 0,
+          title: 'Login'
+        }
       }
     ]
   },
@@ -33,7 +37,11 @@ export default [
       {
         path: '/dashboard',
         name: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
+        meta: {
+          auth: [1, 2, 3, 4],
+          title: 'Dashboard'
+        }
       }
     ]
   }

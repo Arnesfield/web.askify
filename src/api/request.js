@@ -1,5 +1,6 @@
 import qs from 'qs'
 import { jsonify, logger } from '@/utils'
+import store from '@/store'
 import getMessage from './getMessage'
 import instance from './instance'
 
@@ -20,12 +21,22 @@ const request = function(options = {}) {
 
     if (isFormData) {
       data.append('_method', uMethod)
-    } else if (data !== null) {
+    } else if (data) {
       data._method = uMethod
     }
 
     // now change it
     method = 'post'
+  }
+
+  // add authId
+  const authId = store.state.auth.uid || null
+  if (authId) {
+    if (isFormData) {
+      data.append('authId', authId)
+    } else if (data) {
+      data.authId = authId
+    }
   }
 
   // use qs

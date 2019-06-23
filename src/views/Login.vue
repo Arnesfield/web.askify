@@ -141,6 +141,7 @@ export default {
       }
 
       const data = {
+        with: ['roles'],
         email: this.email,
         password: this.password
       }
@@ -153,7 +154,7 @@ export default {
           snackbar(text)
 
           // goto dashboard
-          this.$router.replace('/dashboard')
+          this.$router.replace(this.$route.query.to || '/dashboard')
         },
         error: e => {
           const text = getMessage(e.response, 'Unable to login.')

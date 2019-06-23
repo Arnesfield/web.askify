@@ -1,6 +1,8 @@
 export { default as formRules } from './formRules'
+export { default as hasSimilar } from './hasSimilar'
 export { default as jsonify } from './jsonify'
 export { default as logger } from './logger'
 export { default as ls } from './ls'
 export { default as path } from './path'
 export { default as setDocTitle } from './setDocTitle'
+export { default as toNumberArray } from './toNumberArray'

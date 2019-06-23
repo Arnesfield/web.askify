@@ -20,9 +20,9 @@ export default {
     setUser(state, user) {
       state.user = typeof user === 'object' ? user : null
     },
-    setAuthId(state, id) {
+    setUid(state, id) {
       id = id || null
-      state.authId = id
+      state.uid = id
       ls.setItem(AUTH_ID_KEY, id)
     }
   },
@@ -35,10 +35,31 @@ export default {
         method: 'post',
         success: res => {
           // save user
-          const { user } = res.data || null
+          const { user } = res.data || {}
+
+          commit('setUser', user || null)
+          commit('setUid', user ? user.id : null)
+
+          callback(args.success, res)
+        }
+      })
+    },
+
+    me({ commit, state }, args = {}) {
+      request({
+        ...args,
+        url: 'auth/me',
+        method: 'get',
+        params: {
+          authId: state.uid,
+          authWith: ['roles']
+        },
+        success: res => {
+          // save user
+          const user = res.data
 
           commit('setUser', user)
-          commit('setAuthId', user ? user.id : null)
+          commit('setUid', user ? user.id : null)
 
           callback(args.success, res)
         }
