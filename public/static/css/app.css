@@ -1,0 +1,27 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.mono {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+.x-full {
+  width: 100% !important;
+}
+
+.y-auto {
+  height: auto !important;
+}
+
+.y-full {
+  height: 100% !important;
+}
