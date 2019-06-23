@@ -8,6 +8,8 @@ import './plugins'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
+import './assets/scss/app.scss'
+
 Vue.config.productionTip = false
 
 new Vue({
