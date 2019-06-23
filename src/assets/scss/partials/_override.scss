@@ -1,0 +1,16 @@
+/* snackbar */
+.snack {
+  .v-snack__content {
+    padding: 0px !important;
+
+    .v-btn {
+      &:not(:first-of-type) {
+        margin-left: 8px;
+      }
+
+      &:only-of-type {
+        margin-right: 3px;
+      }
+    }
+  }
+}

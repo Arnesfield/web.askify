@@ -1,19 +1,20 @@
 <template>
-  <v-content>
-    <app-toolbar/>
-
-    <slot v-if="$slots.default"/>
-    <router-view v-else/>
-  </v-content>
+  <basic-layout>
+    <template slot="prepend">
+      <app-toolbar/>
+    </template>
+  </basic-layout>
 </template>
 
 <script>
+import BasicLayout from './BasicLayout'
 import AppToolbar from '@/components/app/AppToolbar'
 
 export default {
   name: 'app-layout',
   components: {
-    AppToolbar
+    AppToolbar,
+    BasicLayout
   }
 }
 </script>

@@ -45,6 +45,7 @@ export default {
 
     mTextFieldProps() {
       const props = {
+        autocomplete: 'password',
         appendIcon: this.fieldProp.icon
       }
 

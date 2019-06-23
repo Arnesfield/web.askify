@@ -44,8 +44,10 @@
                 <v-text-field
                   required
                   ref="email"
+                  type="email"
                   label="Email"
                   prepend-icon="email"
+                  autocomplete="email"
                   v-model="email"
                   :disabled="loading"
                   :rules="[ $vRule('required', 'ID Number is required') ]"
@@ -60,10 +62,10 @@
 
                 <v-btn
                   block
+                  class="mt-3"
                   color="primary"
                   @click="submit"
-                  :disabled="loading"
-                  class="mt-3"
+                  :disabled="loading || !valid"
                 >
                   <span v-text="loading ? 'Logging in...' : 'Login'"/>
                 </v-btn>
@@ -79,7 +81,7 @@
 
       <v-divider/>
       <div class="white pa-2 text-xs-center caption">
-        <span>Don't have an account? <router-link
+        <span class="text--secondary">Don't have an account? <router-link
           to="/"
           class="font-weight-bold"
         >Sign up</router-link>.</span>
@@ -89,6 +91,8 @@
 </template>
 
 <script>
+import { getMessage } from '@/api'
+import { snackbar } from '@/helpers'
 import { imgPath } from '@/utils/path'
 import { formRulesMixin } from '@/utils/formRules'
 import PasswordField from '@/components/utils/PasswordField'
@@ -125,13 +129,9 @@ export default {
   },
 
   mounted() {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        if (this.$refs.email) {
-          this.$refs.email.focus()
-        }
-      }, 100)
-    })
+    setTimeout(() => {
+      this.focusOnInput()
+    }, 100)
   },
 
   methods: {
@@ -140,14 +140,38 @@ export default {
         return
       }
 
-      const body = {
+      const data = {
         email: this.email,
         password: this.password
       }
 
       this.loading = true
+      this.$store.dispatch('auth/login', {
+        data,
+        success: res => {
+          const text = getMessage(res, 'Logged in successfully.')
+          snackbar(text)
 
-      // TODO: login here
+          // goto dashboard
+          this.$router.replace('/dashboard')
+        },
+        error: e => {
+          const text = getMessage(e.response, 'Unable to login.')
+          snackbar(text)
+          this.focusOnInput()
+        },
+        lastly: () => {
+          this.loading = false
+        }
+      })
+    },
+
+    focusOnInput() {
+      this.$nextTick(() => {
+        if (this.$refs.email) {
+          this.$refs.email.focus()
+        }
+      })
     }
   }
 }
