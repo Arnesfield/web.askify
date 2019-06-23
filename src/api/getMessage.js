@@ -27,7 +27,7 @@ export default function(res, message, ...code) {
 
   // fallback
   if (!res || typeof message === 'undefined' || message === null) {
-    message = 'An error occurred.'
+    message = 'The service is unavailable.'
   }
 
   return message
