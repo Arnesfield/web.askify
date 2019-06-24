@@ -16,14 +16,18 @@
       </v-flex>
 
       <v-divider/>
-      <div class="pa-3">
-        <span class="primary--text text--darken-2 caption mono">&copy; Askify 2019</span>
+      <div class="pa-14">
+        <span
+          v-html="copyright"
+          class="primary--text text--darken-2 caption mono"
+        />
       </div>
     </v-layout>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { copyright } from '@/helpers'
 import { NavList } from './components'
 import { NavStoreModel } from '@/store/models'
 
@@ -32,6 +36,10 @@ export default {
   mixins: [NavStoreModel],
   components: {
     NavList
+  },
+
+  computed: {
+    copyright: () => copyright
   }
 }
 </script>

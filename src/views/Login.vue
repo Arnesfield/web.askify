@@ -30,7 +30,10 @@
 
             <div class="text-xs-center mb-5">
               <h1 class="display-1 primary--text text--darken-1 text-uppercase font-weight-bold">Askify</h1>
-              <div class="primary--text text--darken-2 caption mono">&copy; Askify 2019</div>
+              <div
+                v-html="copyright"
+                class="primary--text text--darken-2 caption mono"
+              />
             </div>
 
             <v-card-text
@@ -89,8 +92,8 @@
 
 <script>
 import { getMessage } from '@/api'
-import { snackbar } from '@/helpers'
 import { imgPath } from '@/utils/path'
+import { copyright, snackbar } from '@/helpers'
 import { formRulesMixin } from '@/utils/formRules'
 import PasswordField from '@/components/utils/PasswordField'
 
@@ -110,6 +113,8 @@ export default {
   }),
 
   computed: {
+    copyright: () => copyright,
+
     logoSrc() {
       return `${imgPath}logo.png`
     },
