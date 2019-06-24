@@ -10,16 +10,42 @@
   background: rgba(255, 255, 255, 0.48);
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+.pa-14 {
+  padding: 14px;
+}
+
+.avoid-fab {
+  max-width: calc(100% - (56px + 16px * 2));
+}
+
 .no-decor {
   text-decoration: none;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
   overflow-y: auto;
 }
 
+.mb-large {
+  margin-bottom: 48px;
+}
+
 .fixed {
   position: fixed;
+}
+
+// smooth corners
+$smooth-radius: 6px !important;
+.smooth-corners {
+  border-radius: $smooth-radius;
 }
 
 // .minw-[30, 32, 34, ..., 50]

@@ -1,9 +1,6 @@
 <template>
-  <v-container
-    v-bind="containerProps"
-    :fill-height="!noAutoFillHeight && !hasData"
-  >
-    <slot name="prepend-extra"/>
+  <v-container v-bind="mContainerProps">
+    <slot name="prepend"/>
 
     <slot v-if="hasData"/>
     <v-layout
@@ -24,7 +21,7 @@
 
     <overlay :value="loading"/>
 
-    <slot name="append-extra"/>
+    <slot name="append"/>
   </v-container>
 </template>
 
@@ -70,6 +67,15 @@ export default {
       type: Object,
       default: null,
       required: false
+    }
+  },
+
+  computed: {
+    mContainerProps() {
+      return {
+        fillHeight: !this.noAutoFillHeight && !this.hasData,
+        ...this.containerProps
+      }
     }
   }
 }

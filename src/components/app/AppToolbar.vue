@@ -20,7 +20,7 @@
       <v-icon>{{ icon.text }}</v-icon>
     </v-btn>
 
-    <v-toolbar-title class="headline">
+    <v-toolbar-title class="title">
       <span v-text="title"/>
     </v-toolbar-title>
   </v-toolbar>
