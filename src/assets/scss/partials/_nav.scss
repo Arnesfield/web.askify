@@ -1,0 +1,17 @@
+$border-radius: 48px;
+
+.nav-item,
+.nav-item > :first-child {
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+
+  // &.v-list__tile--link:hover {
+  // background: #ff000024;
+  // }
+}
+
+/* Removes blue border on focus of Navs */
+.nav-item a.v-list__tile.v-list__tile--link:focus {
+  outline: 0;
+  background: rgba(0, 0, 0, 0.05) !important;
+}

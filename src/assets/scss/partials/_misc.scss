@@ -1,3 +1,15 @@
 .no-decor {
   text-decoration: none;
 }
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+// .minw-[30, 32, 34, ..., 50]
+@for $i from 0 through 10 {
+  $val: #{30 + $i * 2};
+  .minw-#{$val} {
+    min-width: #{$val}px !important;
+  }
+}

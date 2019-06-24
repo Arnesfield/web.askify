@@ -66,6 +66,13 @@ export default {
           callback(args.success, res)
         }
       })
+    },
+
+    logout({ commit }, args) {
+      commit('setUser', null)
+      commit('setUid', null)
+
+      callback(args)
     }
   }
 }

@@ -1,4 +1,5 @@
 export { default as defaultsTo } from './defaultsTo'
+export { default as filterIfList } from './filterIfList'
 export { default as formRules } from './formRules'
 export { default as hasSimilar } from './hasSimilar'
 export { default as jsonify } from './jsonify'

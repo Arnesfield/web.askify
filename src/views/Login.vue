@@ -14,10 +14,7 @@
         :active="loading"
       />
 
-      <v-flex
-        class="pt-5"
-        style="overflow-y: auto"
-      >
+      <v-flex class="pt-4 overflow-y-auto">
         <v-layout
           row
           align-center
