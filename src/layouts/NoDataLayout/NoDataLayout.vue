@@ -17,10 +17,12 @@
       />
       <no-data-view
         v-else
-        v-bind="{ hasData, ...viewProps }"
         @reload="$emit('reload', $event)"
+        v-bind="{ hasData, loading, ...viewProps }"
       />
     </v-layout>
+
+    <overlay :value="loading"/>
 
     <slot name="append-extra"/>
   </v-container>
@@ -28,16 +30,25 @@
 
 <script>
 import NoDataView from './NoDataView'
+import Overlay from '@/components/utils/Overlay'
 
 export default {
   name: 'no-data-layout',
   components: {
+    Overlay,
     NoDataView
   },
   props: {
     hasData: {
       type: Boolean,
       default: false,
+      required: false
+    },
+    loading: {
+      type: Boolean,
+      validator: prop =>
+        typeof prop === 'undefined' || typeof prop === 'boolean',
+      default: undefined,
       required: false
     },
     hideNoData: {

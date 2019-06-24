@@ -48,7 +48,8 @@ const request = function(options = {}) {
   options = {
     ...options,
     data,
-    method
+    method,
+    paramsSerializer: (params) => qs.stringify(params)
   }
 
   // actual request

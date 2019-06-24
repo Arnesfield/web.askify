@@ -95,6 +95,7 @@ export default {
       default: 'Loading...'
     },
     loading: {
+      type: Boolean,
       validator: prop =>
         typeof prop === 'undefined' || typeof prop === 'boolean',
       default: undefined,

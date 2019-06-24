@@ -11,7 +11,7 @@ export default {
       setDocTitle(router.currentRoute)
     },
     loadApp(state, load) {
-      state.load = typeof load === 'boolean' ? load : true
+      state.loading = typeof load === 'boolean' ? load : true
     }
   }
 }

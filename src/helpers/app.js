@@ -5,7 +5,7 @@ const appHelper = {
     store.commit('setTitle', e)
   },
   load: (e) => {
-    store.commit('load', e)
+    store.commit('loadApp', e)
   }
 }
 
