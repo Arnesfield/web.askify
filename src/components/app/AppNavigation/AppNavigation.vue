@@ -12,7 +12,7 @@
       fill-height
     >
       <v-flex class="overflow-y-auto">
-        <nav-list/>
+        <nav-list @click="nav$model = null"/>
       </v-flex>
 
       <v-divider/>

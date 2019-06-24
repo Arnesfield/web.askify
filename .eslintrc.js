@@ -37,7 +37,13 @@ module.exports = {
     semi: ['error', 'never'],
     'space-before-function-paren': ['error', 'never'],
     // vue
-    'vue/component-name-in-template-casing': ['error', 'kebab-case'],
+    'vue/component-name-in-template-casing': [
+      'error',
+      'kebab-case',
+      {
+        registeredComponentsOnly: false
+      }
+    ],
     'vue/html-closing-bracket-newline': [
       'error',
       {

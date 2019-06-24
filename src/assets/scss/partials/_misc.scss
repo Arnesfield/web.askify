@@ -6,6 +6,10 @@
   overflow-y: auto;
 }
 
+.fixed {
+  position: fixed;
+}
+
 // .minw-[30, 32, 34, ..., 50]
 @for $i from 0 through 10 {
   $val: #{30 + $i * 2};

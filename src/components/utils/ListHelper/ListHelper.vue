@@ -21,6 +21,7 @@
         :key="`tiles-${i}`"
         :items="item"
         v-else-if="item.constructor.name === 'Array'"
+        @click="$emit('click', $event)"
       />
 
       <v-list-group
@@ -60,6 +61,7 @@
         <list-tiles
           :items="item.items"
           tile-class="ml-2"
+          @click="$emit('click', $event)"
         />
       </v-list-group>
     </template>

@@ -21,18 +21,23 @@
     </v-btn>
 
     <v-toolbar-title class="headline">
-      <span>askify</span>
+      <span v-text="title"/>
     </v-toolbar-title>
   </v-toolbar>
 </template>
 
 <script>
+import { getRouteTitle } from '@/utils'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'app-toolbar',
 
   computed: {
+    title() {
+      return getRouteTitle(this.$route) || 'askify'
+    },
+
     ...mapState('nav', ['clipped']),
     ...mapState('toolbar', ['icon', 'searchable'])
   },

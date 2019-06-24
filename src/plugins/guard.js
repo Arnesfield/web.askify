@@ -1,9 +1,12 @@
 // import store from '@/store'
 import router from '@/router'
 import { setDocTitle } from '@/utils'
-import { isAuth, snackbar } from '@/helpers'
+import { app, isAuth, snackbar } from '@/helpers'
 
 router.beforeEach((to, from, next) => {
+  // remove custom title always when changing routes
+  app.title()
+
   // reload and get user info
   // store.dispatch('auth/me')
 

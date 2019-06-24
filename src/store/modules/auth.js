@@ -1,4 +1,5 @@
 import { ls } from '@/utils'
+import { isAuth } from '@/helpers'
 import { request, callback } from '@/api/request'
 import { AUTH_ID_KEY, AUTH_USER_KEY } from '@/keys'
 
@@ -13,6 +14,14 @@ export default {
   getters: {
     isAuth(state) {
       return Boolean(state.uid && state.user)
+    },
+    isAsker(state) {
+      const { user } = state
+      return user ? isAuth([3]) : false
+    },
+    isExpert(state) {
+      const { user } = state
+      return user ? isAuth([4]) : false
     }
   },
 

@@ -110,6 +110,7 @@ export default {
       )
     },
     onItemClick(item) {
+      this.$emit('click', item)
       if (typeof item.click === 'function') {
         item.click()
       }

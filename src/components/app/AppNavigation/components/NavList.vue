@@ -2,6 +2,7 @@
   <list-helper
     v-bind="{ list }"
     class="py-3x mb-5"
+    @click="$emit('click', $event)"
   />
 </template>
 
@@ -27,15 +28,21 @@ export default {
       const list = [
         [
           {
-            title: 'Dashboard',
-            icon: 'dashboard',
+            title: 'Ask a question',
+            icon: 'live_help',
             to: '/dashboard',
+            class: ''
+          },
+          {
+            title: 'Questions Feed',
+            icon: 'question_answer',
+            to: '/questions',
             class: ''
           },
           {
             title: 'Profile',
             icon: 'account_circle',
-            to: '/profile',
+            to: '/test',
             class: ''
           },
           '_',
