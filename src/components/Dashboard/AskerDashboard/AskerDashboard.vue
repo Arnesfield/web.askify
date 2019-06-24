@@ -12,7 +12,7 @@
         color="blue"
         dismissible
         :value="true"
-        class="my-0 alert-center"
+        class="my-0 x-full alert-center"
       >
         <div>
           Hey <span
@@ -21,7 +21,7 @@
           />! You have asked <span
             v-text="items.length"
             class="body-2 underline"
-          /> {{ pluralQuestion }}. We are glad you are enjoying our platform.
+          /> {{ pluralQuestion }}. We are glad you are enjoying our platform!
         </div>
       </v-alert>
 
