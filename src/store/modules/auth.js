@@ -1,24 +1,26 @@
 import { ls } from '@/utils'
-import { AUTH_ID_KEY } from '@/keys'
 import { request, callback } from '@/api/request'
+import { AUTH_ID_KEY, AUTH_USER_KEY } from '@/keys'
 
 export default {
   namespaced: true,
 
   state: {
-    user: null,
-    uid: ls.getItem(AUTH_ID_KEY)
+    uid: ls.getItem(AUTH_ID_KEY),
+    user: JSON.parse(ls.getItem(AUTH_USER_KEY))
   },
 
   getters: {
     isAuth(state) {
-      return Boolean(state.user)
+      return Boolean(state.uid && state.user)
     }
   },
 
   mutations: {
     setUser(state, user) {
-      state.user = typeof user === 'object' ? user : null
+      user = typeof user === 'object' ? user : null
+      state.user = user
+      ls.setItem(AUTH_USER_KEY, JSON.stringify(user))
     },
     setUid(state, id) {
       id = id || null
