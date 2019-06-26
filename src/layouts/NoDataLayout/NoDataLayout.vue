@@ -19,7 +19,8 @@
       />
     </v-layout>
 
-    <overlay :value="loading"/>
+    <!-- should have data to show -->
+    <overlay :value="hasData && loading"/>
 
     <slot name="append"/>
   </v-container>
