@@ -22,3 +22,12 @@
     margin-bottom: auto;
   }
 }
+
+// img
+.bgv-img {
+  &.contain {
+    .v-image__image {
+      background-size: contain;
+    }
+  }
+}

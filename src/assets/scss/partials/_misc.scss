@@ -1,3 +1,8 @@
+.bg-img {
+  background-size: contain;
+  background-position: center;
+}
+
 .no-bg {
   background: none !important;
 }
@@ -58,5 +63,20 @@ $smooth-radius: 6px !important;
   $val: #{30 + $i * 2};
   .minw-#{$val} {
     min-width: #{$val}px !important;
+  }
+}
+
+// lightbox
+$lightbox: 58 64 72 80 88 108;
+@for $i from 1 through length($lightbox) {
+  $c: nth($lightbox, $i);
+
+  .lightbox-#{$i} {
+    // box-shadow: 0 0 20px inset rgba(0, 0, 0, 0.2);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      transparent #{$c}px
+    );
   }
 }

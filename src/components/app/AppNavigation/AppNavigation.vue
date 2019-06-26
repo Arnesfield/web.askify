@@ -11,6 +11,8 @@
       column
       fill-height
     >
+      <nav-header/>
+
       <v-flex class="overflow-y-auto">
         <nav-list @click="nav$model = null"/>
       </v-flex>
@@ -28,15 +30,13 @@
 
 <script>
 import { copyright } from '@/helpers'
-import { NavList } from './components'
+import * as components from './components'
 import { NavStoreModel } from '@/store/models'
 
 export default {
   name: 'app-navigation',
   mixins: [NavStoreModel],
-  components: {
-    NavList
-  },
+  components: { ...components },
 
   computed: {
     copyright: () => copyright
