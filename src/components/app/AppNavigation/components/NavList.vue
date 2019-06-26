@@ -29,7 +29,7 @@ export default {
         [
           {
             title: 'My Questions',
-            icon: 'live_help',
+            icon: 'dashboard',
             to: '/dashboard',
             class: ''
           },
