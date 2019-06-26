@@ -1,5 +1,6 @@
 import request from '@/api'
 import { app } from '@/helpers'
+import { Question } from '@/entities'
 
 const fetch = function() {
   app.load(true)
@@ -18,7 +19,7 @@ const fetch = function() {
       }
     },
     success: res => {
-      this.items = res.data
+      this.items = Question.collection(res.data)
     },
     error: () => {
       this.items = null

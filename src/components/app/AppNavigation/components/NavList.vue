@@ -28,9 +28,15 @@ export default {
       const list = [
         [
           {
-            title: 'Ask a question',
+            title: 'My Questions',
             icon: 'live_help',
             to: '/dashboard',
+            class: ''
+          },
+          {
+            title: 'Ask a question',
+            icon: 'live_help',
+            to: '/ask',
             class: ''
           },
           {

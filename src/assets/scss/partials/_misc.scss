@@ -18,6 +18,11 @@
   padding: 14px;
 }
 
+.wh-auto {
+  width: auto !important;
+  height: auto !important;
+}
+
 .avoid-fab {
   max-width: calc(100% - (56px + 16px * 2));
 }

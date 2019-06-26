@@ -6,6 +6,8 @@ const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
 
 // app
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard')
+// question
+const MakeQuestion = () => import(/* webpackChunkName: "make-question" */ '@/views/Question/MakeQuestion')
 
 export default [
   {
@@ -41,6 +43,20 @@ export default [
         meta: {
           auth: [1, 2, 3, 4],
           title: 'Dashboard'
+        }
+      },
+
+      // question
+      {
+        path: '/ask',
+        name: 'make-question',
+        component: MakeQuestion,
+        props: {
+          mode: 'create'
+        },
+        meta: {
+          auth: [3],
+          title: 'Ask a question'
         }
       }
     ]

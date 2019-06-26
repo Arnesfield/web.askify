@@ -1,3 +1,4 @@
+export { default as capitalize } from './capitalize'
 export { default as defaultsTo } from './defaultsTo'
 export { default as filterIfList } from './filterIfList'
 export { default as formRules } from './formRules'

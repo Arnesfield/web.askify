@@ -59,10 +59,11 @@
         right
         fixed
         bottom
+        to="/ask"
         slot="activator"
         color="primary"
       >
-        <v-icon>add</v-icon>
+        <v-icon class="wh-auto">add</v-icon>
       </v-btn>
       <span>Ask a question</span>
     </v-tooltip>
@@ -103,7 +104,7 @@ export default {
   },
 
   beforeCreate() {
-    app.title('Ask a question')
+    app.title('My Questions')
   },
   created() {
     this.fetch()

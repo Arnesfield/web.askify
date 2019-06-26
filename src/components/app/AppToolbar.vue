@@ -14,7 +14,7 @@
     <v-btn
       icon
       v-else
-      :to="icon.to"
+      v-bind="icon"
       @click.stop="icon.click"
     >
       <v-icon>{{ icon.text }}</v-icon>
