@@ -3,14 +3,16 @@
     <slot name="prepend"/>
 
     <slot v-if="$slots.default"/>
-    <router-view v-else/>
+    <v-slide-y-transition v-else>
+      <router-view/>
+    </v-slide-y-transition>
 
     <slot name="append"/>
 
     <v-progress-linear
       indeterminate
       height="4"
-      color="warning"
+      color="accent"
       style="top: 0; z-index: 5;"
       class="ma-0 fixed"
       :active="loading"

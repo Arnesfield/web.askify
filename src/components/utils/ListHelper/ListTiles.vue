@@ -14,7 +14,6 @@
       </template>
 
       <v-list-tile
-        exact
         v-else
         :to="item.to"
         :key="`tile-${i}`"
