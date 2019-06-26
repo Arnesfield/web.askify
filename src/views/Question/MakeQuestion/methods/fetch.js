@@ -2,15 +2,28 @@ import request from '@/api'
 import { app } from '@/helpers'
 import { Question } from '@/entities'
 
+const initItem = function() {
+  this.item = new Question({
+    title: '',
+    content: '',
+    img_src: ''
+  })
+}
+
 const fetch = function() {
   // only fetch if update
-  if (!this.isModeUpdate) {
+  if (this.isModeCreate) {
+    this.initItem()
     return
   }
 
   app.load()
   request({
-    ...this.requestProps,
+    url: `questions/${this.questionId}`,
+    method: 'get',
+    params: {
+      with: ['tags']
+    },
     success: res => {
       this.item = new Question(res.data)
     },
@@ -20,4 +33,4 @@ const fetch = function() {
   })
 }
 
-export { fetch }
+export { fetch, initItem }

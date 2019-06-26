@@ -67,7 +67,7 @@ export default {
     msg: {
       type: String,
       required: false,
-      default: 'No items to show :('
+      default: 'Sorry, no to show here :('
     },
     msgClass: {
       type: [String, Object],

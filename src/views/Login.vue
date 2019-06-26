@@ -62,6 +62,7 @@
 
                 <v-btn
                   block
+                  large
                   class="mt-3"
                   color="primary"
                   @click="submit"

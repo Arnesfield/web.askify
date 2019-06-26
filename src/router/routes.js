@@ -46,10 +46,12 @@ export default [
         }
       },
 
-      // question
+      //! question
+
+      // make question
       {
         path: '/ask',
-        name: 'make-question',
+        name: 'create-question',
         component: MakeQuestion,
         props: {
           mode: 'create'
@@ -57,6 +59,18 @@ export default [
         meta: {
           auth: [3],
           title: 'Ask a question'
+        }
+      },
+      {
+        path: '/ask/:id',
+        name: 'update-question',
+        component: MakeQuestion,
+        props: {
+          mode: 'update'
+        },
+        meta: {
+          auth: [3],
+          title: 'Update a question'
         }
       }
     ]

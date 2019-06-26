@@ -11,7 +11,7 @@
         class="px-3 mb-2 overflow-x-auto"
       >
         <div
-          v-html="item.created_at_info.human"
+          v-html="datetimeText"
           class="text--secondary caption"
         />
 
@@ -88,6 +88,17 @@ export default {
         'error white--text': c <= 0,
         'success white--text': c > 0
       }
+    },
+
+    datetimeText() {
+      const {
+        created_at: c,
+        updated_at: u,
+        created_at_info: ci,
+        updated_at_info: ui
+      } = this.item
+
+      return c === u ? ci.human : `${ui.human} (updated)`
     }
   }
 }

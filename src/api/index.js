@@ -1,3 +1,4 @@
+export { default as addArrayToRequest } from './addArrayToRequest'
 export { default as addFileToRequest } from './addFileToRequest'
 export { default as getMessage } from './getMessage'
 export { default as instance } from './instance'
