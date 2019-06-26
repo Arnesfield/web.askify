@@ -1,7 +1,7 @@
 import { createState, createModel } from '@/store/builder'
 
 const build = {
-  icon: ['changeIcon', null],
+  icon: ['setIcon', null],
   searchable: ['makeSearchable', false]
 }
 

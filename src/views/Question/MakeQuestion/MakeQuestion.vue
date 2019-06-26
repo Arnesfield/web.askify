@@ -77,14 +77,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import { makeable } from '@/mixins'
 import * as methods from './methods'
+import { backable, makeable } from '@/mixins'
 import { formRulesMixin } from '@/utils/formRules'
 import NoDataLayout from '@/layouts/NoDataLayout'
 
 export default {
   name: 'make-question',
-  mixins: [makeable, formRulesMixin],
+  mixins: [backable, makeable, formRulesMixin],
   components: {
     NoDataLayout
   },

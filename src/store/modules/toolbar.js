@@ -5,7 +5,7 @@ export default {
   state,
 
   mutations: {
-    changeIcon(state, icon) {
+    setIcon(state, icon) {
       if (typeof icon === 'string') {
         icon = {
           text: icon,
