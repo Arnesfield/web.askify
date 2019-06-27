@@ -13,7 +13,7 @@
         class="px-3 mb-2 overflow-x-auto"
       >
         <div
-          v-html="datetimeText"
+          v-html="`asked ${datetimeText}`"
           class="text--secondary caption"
         />
 
@@ -31,11 +31,23 @@
         v-html="item.title"
       />
 
-      <div
-        v-if="!hideUser"
-        v-text="item.user.fullname"
-        class="px-3 font-weight-bold"
-      />
+      <v-layout
+        row
+        align-center
+        class="px-3"
+      >
+        <avatar-view
+          :user="item.user"
+          :avatar-props="{ size: 32 }"
+        />
+
+        <div
+          v-if="!hideUser"
+          v-text="item.user.fullname"
+          class="pl-2 font-weight-bold"
+        />
+      </v-layout>
+
 
       <tag-list
         class="pl-3 mt-2"
@@ -48,11 +60,13 @@
 <script>
 import { pluralize } from '@/utils'
 import TagList from '@/components/Tag/TagList'
+import AvatarView from '@/components/User/AvatarView'
 
 export default {
   name: 'question-item',
   components: {
-    TagList
+    TagList,
+    AvatarView
   },
   props: {
     item: {

@@ -35,12 +35,14 @@
       />
 
       <div
-        v-html="lastUpdatedText"
-        class="mt-3 caption text--secondary"
-      />
+        v-if="lastUpdatedText"
+        class="mt-3 caption text--secondary font-italic"
+      >
+        last updated at <strong v-text="lastUpdatedText"/>
+      </div>
     </v-card-text>
 
-    <v-divider/>
+    <v-divider class="mx-2"/>
 
     <v-list
       dense
@@ -51,12 +53,13 @@
           <avatar-view
             :user="item.user"
             :avatar-props="{ size: 32 }"
+            class="elevation-2"
           />
         </v-list-tile-avatar>
 
         <v-list-tile-content>
           <v-list-tile-sub-title>asked {{ item.created_at_common }}</v-list-tile-sub-title>
-          <v-list-tile-title>{{ item.user.fullname }}</v-list-tile-title>
+          <v-list-tile-title class="font-weight-bold">{{ item.user.fullname }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -101,7 +104,7 @@ export default {
         updated_at_info: ui
       } = this.item
 
-      return c === u ? null : `last updated at ${ui.common}`
+      return c === u ? null : ui.common
     }
   }
 }
