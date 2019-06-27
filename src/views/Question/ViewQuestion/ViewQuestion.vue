@@ -4,8 +4,15 @@
     v-bind="{ hasData }"
     :class="{ 'pa-0': hasData }"
   >
-    <!-- TODO: show question here -->
-    {{ item }}
+    <v-layout
+      column
+      fill-height
+    >
+      <question-detailed
+        v-if="item"
+        v-bind="{ item }"
+      />
+    </v-layout>
 
     <view-question-no-data slot="no-data"/>
   </no-data-layout>
@@ -15,11 +22,13 @@
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import { ViewQuestionNoData } from '@/components/Question/NoData'
+import QuestionDetailed from '@/components/Question/QuestionDetailed'
 
 export default {
   name: 'view-question',
   components: {
     NoDataLayout,
+    QuestionDetailed,
     ViewQuestionNoData
   },
 

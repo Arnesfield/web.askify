@@ -1,6 +1,7 @@
 <template>
   <v-layout
     row
+    v-bind="layoutProps"
     v-if="items.length > 0"
     class="overflow-x-auto"
   >
@@ -9,7 +10,7 @@
       v-for="(item, i) in items"
       :class="{ [lastItemClass]: i === items.length - 1 }"
     >
-      <v-chip>{{ item.name }}</v-chip>
+      <v-chip v-bind="chipProps">{{ item.name }}</v-chip>
     </span>
   </v-layout>
 </template>
@@ -26,6 +27,16 @@ export default {
       type: String,
       required: false,
       default: 'pr-3'
+    },
+    layoutProps: {
+      type: Object,
+      default: null,
+      required: false
+    },
+    chipProps: {
+      type: Object,
+      default: null,
+      required: false
     }
   }
 }

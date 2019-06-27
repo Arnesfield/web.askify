@@ -9,7 +9,12 @@ const fetch = function() {
     url: `questions/${this.questionId}`,
     method: 'get',
     params: {
-      with: ['answers.transactionsViewable']
+      withCount: ['answers'],
+      with: [
+        'user',
+        'tags',
+        'answers.transactionsViewable'
+      ]
     },
     success: res => {
       this.item = new Question(res.data)
