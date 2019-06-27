@@ -9,7 +9,7 @@ const METHODS = ['patch', 'put', 'delete']
 const callback = (fn, e) => typeof fn === 'function' ? fn(e) : undefined
 
 const request = function(options = {}) {
-  let { data, method, success, error, lastly } = options
+  let { data, method, params, success, error, lastly } = options
 
   method = method || 'get'
 
@@ -36,6 +36,15 @@ const request = function(options = {}) {
       data.append('authId', authId)
     } else if (data) {
       data.authId = authId
+    }
+  }
+
+  // for get method
+  if (params) {
+    if (params instanceof FormData) {
+      params.append('authId', authId)
+    } else if (params)  {
+      params.authId = authId
     }
   }
 

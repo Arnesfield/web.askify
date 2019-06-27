@@ -4,6 +4,11 @@
     v-bind="{ hasData }"
     :class="{ 'pa-0': hasData }"
   >
+    <update-question-no-data
+      slot="no-data"
+      @reload="fetch"
+    />
+
     <v-layout
       column
       v-if="item"
@@ -80,13 +85,15 @@ import { mapState } from 'vuex'
 import * as methods from './methods'
 import { backable, makeable } from '@/mixins'
 import { formRulesMixin } from '@/utils/formRules'
+import { UpdateQuestionNoData } from '@/components/Question/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
 
 export default {
   name: 'make-question',
   mixins: [backable, makeable, formRulesMixin],
   components: {
-    NoDataLayout
+    NoDataLayout,
+    UpdateQuestionNoData
   },
 
   data: () => ({

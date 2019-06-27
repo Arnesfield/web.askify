@@ -29,6 +29,9 @@
         <v-divider/>
         <question-list
           v-bind="{ items }"
+          :item-props="{
+            to: item => `/questions/${item.id}`
+          }"
         />
         <v-divider/>
       </v-flex>
@@ -74,9 +77,9 @@
 import { mapState } from 'vuex'
 import { app } from '@/helpers'
 import { pluralize } from '@/utils'
+import { MyQuestionsNoData } from '@/components/Question/NoData'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
-import MyQuestionsNoData from '@/components/Question/NoData'
 import QuestionList from '@/components/Question/QuestionList'
 
 export default {

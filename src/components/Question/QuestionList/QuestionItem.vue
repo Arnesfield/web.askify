@@ -1,6 +1,8 @@
 <template>
   <v-card
     ripple
+    :to="mTo"
+    v-bind="itemProps"
     class="elevation-0"
   >
     <v-card-text class="px-0">
@@ -66,6 +68,16 @@ export default {
       type: Number,
       default: 0,
       required: false
+    },
+    to: {
+      type: [String, Function],
+      required: false,
+      default: undefined
+    },
+    itemProps: {
+      type: Object,
+      default: null,
+      required: false
     }
   },
 
@@ -99,6 +111,11 @@ export default {
       } = this.item
 
       return c === u ? ci.human : `${ui.human} (updated)`
+    },
+
+    mTo() {
+      const { to, item } = this
+      return typeof to === 'function' ? to(item) : to
     }
   }
 }
