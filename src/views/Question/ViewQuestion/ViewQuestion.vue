@@ -14,11 +14,36 @@
       />
     </v-layout>
 
-    <view-question-no-data slot="no-data"/>
+    <view-question-no-data
+      slot="no-data"
+      @reload="fetch"
+    />
+
+    <v-tooltip
+      left
+      slot="append"
+      open-delay="50"
+      close-delay="50"
+      v-if="isExpert"
+    >
+      <v-btn
+        fab
+        right
+        fixed
+        bottom
+        slot="activator"
+        color="primary"
+        :to="`/questions/${questionId}/answer`"
+      >
+        <v-icon class="wh-auto">send</v-icon>
+      </v-btn>
+      <span>Answer question</span>
+    </v-tooltip>
   </no-data-layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import { ViewQuestionNoData } from '@/components/Question/NoData'
@@ -43,7 +68,9 @@ export default {
 
     hasData() {
       return !!this.item
-    }
+    },
+
+    ...mapGetters('auth', ['isExpert'])
   },
 
   created() {

@@ -38,7 +38,7 @@
         v-if="lastUpdatedText"
         class="mt-3 caption text--secondary font-italic"
       >
-        last updated at <strong v-text="lastUpdatedText"/>
+        last updated on <strong v-text="lastUpdatedText"/>
       </div>
     </v-card-text>
 
