@@ -7,6 +7,7 @@ const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
 // app
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard')
 // question
+const Questions = () => import(/* webpackChunkName: "questions" */ '@/views/Question/Questions')
 const MakeQuestion = () => import(/* webpackChunkName: "make-question" */ '@/views/Question/MakeQuestion')
 const ViewQuestion = () => import(/* webpackChunkName: "view-question" */ '@/views/Question/ViewQuestion')
 
@@ -76,6 +77,15 @@ export default [
       },
 
       // view question
+      {
+        path: '/questions',
+        name: 'Questions',
+        component: Questions,
+        meta: {
+          auth: [1, 2, 3, 4],
+          title: 'All Questions'
+        }
+      },
       {
         path: '/questions/:id',
         name: 'view-question',

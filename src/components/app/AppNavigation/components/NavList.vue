@@ -40,7 +40,7 @@ export default {
             class: ''
           },
           {
-            title: 'Questions Feed',
+            title: 'All Questions',
             icon: 'question_answer',
             to: '/questions',
             class: ''
