@@ -48,7 +48,6 @@
         />
       </v-layout>
 
-
       <tag-list
         class="pl-3 mt-2"
         :items="visibleTags"

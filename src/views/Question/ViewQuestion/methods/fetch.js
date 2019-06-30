@@ -13,6 +13,7 @@ const fetch = function() {
       with: [
         'user',
         'tags',
+        'answers.user',
         'answers.transactionsViewable'
       ]
     },

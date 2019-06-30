@@ -7,11 +7,24 @@
     <v-layout
       column
       fill-height
+      v-if="item"
     >
       <question-detailed
-        v-if="item"
         v-bind="{ item }"
       />
+
+      <v-alert
+        :value="true"
+        color="blue"
+        class="x-full my-0"
+      >
+        {{ item.answers.length }} available {{ answersText }}
+      </v-alert>
+        
+
+      <v-divider/>
+
+      <answer-list :items="item.answers"/>
     </v-layout>
 
     <view-question-no-data
@@ -44,14 +57,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { pluralize } from '@/utils'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
+import AnswerList from '@/components/Answer/AnswerList'
 import { ViewQuestionNoData } from '@/components/Question/NoData'
 import QuestionDetailed from '@/components/Question/QuestionDetailed'
 
 export default {
   name: 'view-question',
   components: {
+    AnswerList,
     NoDataLayout,
     QuestionDetailed,
     ViewQuestionNoData
@@ -68,6 +84,10 @@ export default {
 
     hasData() {
       return !!this.item
+    },
+
+    answersText() {
+      return pluralize(this.item.answers.length, 'answer', 'answers')
     },
 
     ...mapGetters('auth', ['isExpert'])
