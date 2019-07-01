@@ -5,6 +5,7 @@
         class="mb-3"
         :key="`item-${i}`"
         v-bind="{ item, ...itemProps }"
+        @fetch-all="$emit('fetch-all')"
       />
     </template>
   </div>

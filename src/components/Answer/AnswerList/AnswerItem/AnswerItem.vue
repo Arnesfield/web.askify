@@ -1,7 +1,7 @@
 <template>
   <no-data-layout
     has-data
-    class="pa-0"
+    class="pa-0 white"
     v-bind="{ loading }"
     :container-props="{ fluid: true }"
   >
@@ -24,7 +24,10 @@
       }"
     />
 
-    <v-card v-bind="itemProps">
+    <v-card
+      v-bind="itemProps"
+      :class="{ 'mb-4 accent-opac-3 elevation-4': isBest }"
+    >
       <v-card-text class="px-0">
         <v-layout
           row
@@ -46,8 +49,20 @@
 
           <div
             v-text="'best answer'"
-            v-if="item.is_best_at"
+            v-if="isBest"
             class="px-2 ml-1 caption smooth-corners cyan white--text"
+          />
+        </v-layout>
+
+        <v-layout
+          row
+          wrap
+          justify-center
+          class="px-3 mb-2"
+        >
+          <div
+            class="text--secondary caption"
+            v-html="`answered ${datetimeText}`"
           />
         </v-layout>
 
@@ -95,6 +110,7 @@
       <v-list
         dense
         two-line
+        class="transparent"
       >
         <v-list-tile>
           <v-list-tile-avatar>
@@ -168,20 +184,62 @@ export default {
     ...mapState('auth', ['user']),
     ...mapGetters('auth', ['isAsker']),
 
+    isBest() {
+      return !!this.item.is_best_at
+    },
     isViewable() {
       return this.item.is_viewable
     },
     isPayable() {
       return !!this.item.privated_at
     },
+    didVote() {
+      return !!this.item.vote
+    },
+    didUpvote() {
+      const { upvoted_at } = this.item.vote || {}
+      return !!upvoted_at
+    },
+    didDownvote() {
+      const { downvoted_at } = this.item.vote || {}
+      return !!downvoted_at
+    },
     isQuestionByUser() {
       const { user, question } = this
       return question.user.id == user.id
     },
 
+    voteRequestProps() {
+      const { didVote } = this
+      const { id } = this.item.vote || {}
+
+      const props = {
+        create: {
+          method: 'post',
+          url: 'votes'
+        },
+        update: {
+          method: 'patch',
+          url: `votes/${id}`
+        }
+      }
+
+      return props[didVote ? 'update' : 'create']
+    },
+
+    bestRequestProps() {
+      const { item, isBest } = this
+      const { id } = item || {}
+      const bestText = !isBest ? 'best' : 'unbest'
+
+      return {
+        url: `answers/${id}/${bestText}`
+      }
+    },
+
     voteCountText() {
       const { item } = this
-      const t = pluralize(item.votes_total, 'vote', 'votes')
+      const t = pluralize(item.votes_total, 'total vote', 'total votes')
       return `${item.votes_total} ${t}`
     },
 
@@ -210,14 +268,18 @@ export default {
         return []
       }
 
-      const { isViewable, isQuestionByUser } = this
+      const {
+        didUpvote,
+        didDownvote,
+        isBest,
+        isViewable,
+        isQuestionByUser
+      } = this
 
       const btnProps = {
         icon: true,
         small: true,
         dark: true
-        // outline: true,
-
       }
 
       const actions =  [
@@ -231,27 +293,34 @@ export default {
             color: 'primary'
           }
         },
+        // vote
         {
           icon: 'keyboard_arrow_up',
           if: isViewable,
+          click: () => this.vote(didUpvote ? 'unvote' : 'upvote'),
           btnProps: {
             ...btnProps,
+            outline: !didUpvote,
             color: 'teal lighten-1'
           }
         },
         {
           icon: 'keyboard_arrow_down',
           if: isViewable,
+          click: () => this.vote(didDownvote ? 'unvote' : 'downvote'),
           btnProps: {
             ...btnProps,
+            outline: !didDownvote,
             color: 'warning'
           }
         },
         {
           icon: 'star',
           if: isViewable && isQuestionByUser,
+          click: () => this.best(),
           btnProps: {
             ...btnProps,
+            outline: !isBest,
             color: 'cyan'
           }
         }
@@ -263,6 +332,10 @@ export default {
 
   methods: {
     ...methods,
+
+    fetchAll() {
+      this.$emit('fetch-all')
+    },
 
     actionClick(click, e) {
       typeof click === 'function' ? click(e) : undefined

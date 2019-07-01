@@ -25,6 +25,7 @@
       <v-divider/>
 
       <answer-list
+        @fetch-all="fetch"
         :items="item.answers"
         :item-props="{ question: item }"
       />
