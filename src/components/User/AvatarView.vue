@@ -1,5 +1,6 @@
 <template>
   <v-avatar
+    v-if="user"
     v-bind="mAvatarProps"
     :title="title || user.fullname"
   >
