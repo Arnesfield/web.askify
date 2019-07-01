@@ -46,7 +46,7 @@
       </div>
     </v-layout>
 
-    <my-questions-no-data
+    <questions-no-data
       slot="no-data"
       @reload="fetch"
     />
@@ -76,7 +76,7 @@
 <script>
 import { mapState } from 'vuex'
 import { pluralize } from '@/utils'
-import { MyQuestionsNoData } from '@/components/Question/NoData'
+import { QuestionsNoData } from '@/components/Question/NoData'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import QuestionList from '@/components/Question/QuestionList'
@@ -86,7 +86,7 @@ export default {
   components: {
     NoDataLayout,
     QuestionList,
-    MyQuestionsNoData
+    QuestionsNoData
   },
 
   data: () => ({
