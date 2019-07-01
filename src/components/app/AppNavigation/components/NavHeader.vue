@@ -19,6 +19,7 @@
 
           <v-list
             dark
+            v-if="user"
             class="x-full"
           >
             <v-list-tile>
