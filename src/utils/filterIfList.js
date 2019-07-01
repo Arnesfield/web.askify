@@ -1,4 +1,7 @@
 export default function(item) {
-  const hasIf = typeof item === 'object' && typeof item.if === 'function'
-  return hasIf ? item.if() : true
+  const { if: ifVal } = item || {}
+  const isBool = typeof ifVal === 'boolean'
+  const isFunction = typeof ifVal === 'function'
+
+  return isBool ? ifVal : (isFunction ? ifVal() : true)
 }

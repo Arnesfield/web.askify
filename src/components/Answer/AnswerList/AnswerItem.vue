@@ -21,10 +21,43 @@
       </v-layout>
 
       <div
+        v-if="isViewable"
         v-html="item.content"
         class="px-3 text-output"
       />
+
+      <div
+        v-else
+        class="mx-3 mt-3 py-2 subheading text-xs-center error smooth-corners white--text"
+      >
+        This answer requires a payment of <strong v-text="`$${item.price}`"/>.
+      </div>
     </v-card-text>
+
+    <v-card-actions
+      v-if="cardActions.length > 0"
+      class="pt-0 px-3 justify-center"
+    >
+      <v-btn
+        :key="i"
+        v-bind="action.btnProps"
+        v-for="(action, i) in cardActions"
+        @click="actionClick(action.click, $event)"
+      >
+        <v-icon
+          v-if="action.icon"
+          v-bind="action.iconProps"
+        >
+          {{ action.icon }}
+        </v-icon>
+
+        <span
+          class="ml-2"
+          v-if="action.text"
+          v-text="action.text"
+        />
+      </v-btn>
+    </v-card-actions>
 
     <v-divider class="mx-2"/>
 
@@ -47,13 +80,13 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
-
-    <!-- TODO: add actions -->
   </v-card>
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import { pluralize } from '@/utils'
+import { filterIfList } from '@/utils'
 import AvatarView from '@/components/User/AvatarView'
 
 export default {
@@ -63,6 +96,10 @@ export default {
   },
   props: {
     item: {
+      type: Object,
+      required: true
+    },
+    question: {
       type: Object,
       required: true
     },
@@ -89,6 +126,17 @@ export default {
   },
 
   computed: {
+    ...mapState('auth', ['user']),
+    ...mapGetters('auth', ['isAsker']),
+
+    isViewable() {
+      return this.item.is_viewable
+    },
+    isQuestionByUser() {
+      const { user, question } = this
+      return question.user.id == user.id
+    },
+
     voteCountText() {
       const { item } = this
       const t = pluralize(item.votes_total, 'vote', 'votes')
@@ -113,6 +161,67 @@ export default {
       } = this.item
 
       return c === u ? ci.human : `${ui.human} (updated)`
+    },
+
+    cardActions() {
+      if (!this.isAsker) {
+        return []
+      }
+
+      const { isViewable, isQuestionByUser } = this
+
+      const btnProps = {
+        icon: true,
+        small: true,
+        dark: true
+        // outline: true,
+
+      }
+
+      const actions =  [
+        {
+          icon: 'payment',
+          text: 'Pay-to-view',
+          if: !isViewable,
+          btnProps: {
+            ...btnProps,
+            icon: false,
+            color: 'primary'
+          }
+        },
+        {
+          icon: 'keyboard_arrow_up',
+          if: isViewable,
+          btnProps: {
+            ...btnProps,
+            color: 'teal lighten-1'
+          }
+        },
+        {
+          icon: 'keyboard_arrow_down',
+          if: isViewable,
+          btnProps: {
+            ...btnProps,
+            color: 'warning'
+          }
+        },
+        {
+          icon: 'star',
+          if: isViewable && isQuestionByUser,
+          btnProps: {
+            ...btnProps,
+            color: 'orange'
+          }
+        }
+      ]
+
+      return actions.filter(filterIfList)
+    }
+  },
+
+  methods: {
+    actionClick(click, e) {
+      typeof click === 'function' ? click(e) : undefined
     }
   }
 }

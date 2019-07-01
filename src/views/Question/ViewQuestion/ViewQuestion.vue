@@ -24,7 +24,10 @@
 
       <v-divider/>
 
-      <answer-list :items="item.answers"/>
+      <answer-list
+        :items="item.answers"
+        :item-props="{ question: item }"
+      />
     </v-layout>
 
     <view-question-no-data
