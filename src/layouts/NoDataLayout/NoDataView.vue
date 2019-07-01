@@ -9,7 +9,7 @@
       <template v-else>
         <v-progress-circular
           indeterminate
-          :color="mProgress.color"
+          v-bind="mProgress.props"
         />
         <div
           v-if="mProgress.text"

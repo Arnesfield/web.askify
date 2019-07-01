@@ -1,5 +1,8 @@
 <template>
-  <v-container v-bind="mContainerProps">
+  <v-container
+    class="relative"
+    v-bind="mContainerProps"
+  >
     <slot name="prepend"/>
 
     <slot v-if="hasData"/>
@@ -20,7 +23,9 @@
     </v-layout>
 
     <!-- should have data to show -->
-    <overlay :value="hasData && loading"/>
+    <overlay :value="hasData && loading">
+      <slot name="overlay"/>
+    </overlay>
 
     <slot name="append"/>
   </v-container>
