@@ -117,7 +117,7 @@ export default {
     copyright: () => copyright,
 
     logoSrc() {
-      return `${imgPath}logo.png`
+      return `${imgPath}/icons/144x144.png`
     },
 
     textFieldProps() {

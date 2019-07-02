@@ -6,8 +6,8 @@ import 'vuetify/src/stylus/app.styl'
 
 const theme = {
   primary: '#5E7A87',
-  secondary: 'FFD435', // #424242
-  accent: '#FFC107', // $FFD435
+  secondary: '#FFD435', // #424242
+  accent: '#F5941E', // #FFC107, #FFD435
   error: '#FF5252',
   info: '#2196F3',
   success: '#4CAF50',
