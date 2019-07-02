@@ -8,4 +8,8 @@
   RewriteRule . /index.html [L]
 </IfModule>
 
+<Files "service-worker.js">
+  Header Set Service-Worker-allowed "/"
+</Files>
+
 # use /school/askify/web.askify/dist/ as base if local

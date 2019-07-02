@@ -26,7 +26,10 @@
 
     <v-card
       v-bind="itemProps"
-      :class="{ 'mb-4 accent-opac-4 elevation-4': isBest }"
+      :class="{
+        'deep-orange-opac-3': !isViewable,
+        'mb-4 accent-opac-4 elevation-4': isBest
+      }"
     >
       <v-card-text class="px-0">
         <v-layout
@@ -42,8 +45,8 @@
           />
 
           <div
-            v-text="'paid'"
             v-if="isPayable"
+            v-text="paidCountText"
             class="px-2 ml-1 caption smooth-corners orange white--text"
           />
 
@@ -72,12 +75,15 @@
           class="px-3 text-output"
         />
 
-        <div
+        <v-alert
           v-else
-          class="mx-3 mt-3 py-2 subheading text-xs-center error smooth-corners white--text"
+          outline
+          :value="true"
+          color="deep-orange"
+          class="mx-3 mt-3 py-2 subheading text-xs-center smooth-corners"
         >
           This answer requires a payment of <strong v-text="`$${item.price}`"/>.
-        </div>
+        </v-alert>
       </v-card-text>
 
       <v-card-actions
@@ -133,14 +139,16 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { pluralize } from '@/utils'
 import { filterIfList } from '@/utils'
+import { app, gotoPayment } from '@/helpers'
 import NoDataLayout from '@/layouts/NoDataLayout'
+import mixins from './mixins'
 import * as methods from './methods'
 import AvatarView from '@/components/User/AvatarView'
 
 export default {
   name: 'answer-item',
+  mixins: [...mixins],
   components: {
     AvatarView,
     NoDataLayout
@@ -184,87 +192,9 @@ export default {
     ...mapState('auth', ['user']),
     ...mapGetters('auth', ['isAsker']),
 
-    isBest() {
-      return !!this.item.is_best_at
-    },
-    isViewable() {
-      return this.item.is_viewable
-    },
-    isPayable() {
-      return !!this.item.privated_at
-    },
-    didVote() {
-      return !!this.item.vote
-    },
-    didUnvote() {
-      const { deleted_at } = this.item.vote || {}
-      return !!deleted_at
-    },
-    didUpvote() {
-      const { upvoted_at } = this.item.vote || {}
-      return !!upvoted_at && !this.didUnvote
-    },
-    didDownvote() {
-      const { downvoted_at } = this.item.vote || {}
-      return !!downvoted_at && !this.didUnvote
-    },
     isQuestionByUser() {
       const { user, question } = this
       return question.user.id == user.id
-    },
-
-    voteRequestProps() {
-      const { didVote } = this
-      const { id } = this.item.vote || {}
-
-      const props = {
-        create: {
-          method: 'post',
-          url: 'votes'
-        },
-        update: {
-          method: 'patch',
-          url: `votes/${id}`
-        }
-      }
-
-      return props[didVote ? 'update' : 'create']
-    },
-
-    bestRequestProps() {
-      const { item, isBest } = this
-      const { id } = item || {}
-      const bestText = !isBest ? 'best' : 'unbest'
-
-      return {
-        url: `answers/${id}/${bestText}`
-      }
-    },
-
-    voteCountText() {
-      const { item } = this
-      const t = pluralize(item.votes_total, 'total vote', 'total votes')
-      return `${item.votes_total} ${t}`
-    },
-
-    voteCountClass() {
-      const { votes_total: t } = this.item
-      return {
-        'grey lighten-2': t === 0,
-        'error white--text': t < 0,
-        'success white--text': t > 0
-      }
-    },
-
-    datetimeText() {
-      const {
-        created_at: c,
-        updated_at: u,
-        created_at_info: ci,
-        updated_at_info: ui
-      } = this.item
-
-      return c === u ? ci.human : `${ui.human} (updated)`
     },
 
     cardActions() {
@@ -291,10 +221,14 @@ export default {
           icon: 'payment',
           text: 'Pay-to-view',
           if: !isViewable,
+          click: this.pay,
           btnProps: {
             ...btnProps,
+            small: false,
             icon: false,
-            color: 'primary'
+            depressed: true,
+            color: 'primary',
+            class: 'smooth-corners'
           }
         },
         // vote
@@ -336,6 +270,16 @@ export default {
 
   methods: {
     ...methods,
+
+    pay() {
+      app.load()
+      this.loading = true
+
+      const { item, user } = this
+      this.$nextTick(() => {
+        gotoPayment(item, user, this.$route.fullPath)
+      })
+    },
 
     fetchAll() {
       this.$emit('fetch-all')

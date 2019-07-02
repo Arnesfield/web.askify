@@ -1,6 +1,8 @@
 export { default as app } from './app'
 export { default as autoYear } from './autoYear'
 export { default as copyright } from './copyright'
+export { default as gotoPayment } from './gotoPayment'
 export { default as isAuth } from './isAuth'
+export { default as local } from './local'
 export { default as makeFormData } from './makeFormData'
 export { default as snackbar } from './snackbar'

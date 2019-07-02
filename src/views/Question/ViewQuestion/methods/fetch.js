@@ -14,6 +14,7 @@ const fetch = function() {
         'user',
         'tags',
         'answers.user',
+        'answers.transactionsApproved',
         'answers.transactionsViewable'
       ]
     },

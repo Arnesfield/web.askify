@@ -10,6 +10,7 @@ const fetch = function() {
     url: `answers/${this.item.id}`,
     method: 'get',
     params: {
+      withCount: ['transactionsApproved'],
       with: [
         'user',
         'transactionsViewable'

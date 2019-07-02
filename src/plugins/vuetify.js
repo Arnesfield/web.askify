@@ -18,6 +18,8 @@ const theme = {
 // changes of the theme is not listened
 addStyle('primaryStyle', opacGenerator('.primary-opac-', theme.primary))
 addStyle('accentStyle', opacGenerator('.accent-opac-', theme.accent))
+addStyle('errorStyle', opacGenerator('.error-opac-', theme.error))
+addStyle('deepOrangeStyle', opacGenerator('.deep-orange-opac-', colors.deepOrange.base))
 
 Vue.use(Vuetify, {
   theme,

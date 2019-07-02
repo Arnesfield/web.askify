@@ -1,3 +1,4 @@
+const apiUrl = process.env.VUE_APP_API_URL
 const assetsPath = 'static/'
 const imgPath = assetsPath + 'img/'
 const uploadsPath = 'uploads/'
@@ -8,6 +9,7 @@ const questionsPath = uploadsImgPath + 'questions/'
 const tagsPath = uploadsImgPath + 'tags/'
 
 export {
+  apiUrl,
   assetsPath,
   imgPath,
   avatarsPath,
@@ -17,6 +19,7 @@ export {
 }
 
 export default {
+  apiUrl,
   assetsPath,
   imgPath,
   avatarsPath,
