@@ -26,7 +26,7 @@
 
     <v-card
       v-bind="itemProps"
-      :class="{ 'mb-4 accent-opac-3 elevation-4': isBest }"
+      :class="{ 'mb-4 accent-opac-4 elevation-4': isBest }"
     >
       <v-card-text class="px-0">
         <v-layout
@@ -196,13 +196,17 @@ export default {
     didVote() {
       return !!this.item.vote
     },
+    didUnvote() {
+      const { deleted_at } = this.item.vote || {}
+      return !!deleted_at
+    },
     didUpvote() {
       const { upvoted_at } = this.item.vote || {}
-      return !!upvoted_at
+      return !!upvoted_at && !this.didUnvote
     },
     didDownvote() {
       const { downvoted_at } = this.item.vote || {}
-      return !!downvoted_at
+      return !!downvoted_at && !this.didUnvote
     },
     isQuestionByUser() {
       const { user, question } = this
