@@ -82,7 +82,8 @@
           color="deep-orange"
           class="mx-3 mt-3 py-2 subheading text-xs-center smooth-corners"
         >
-          This answer requires a payment of <strong v-text="`$${item.price}`"/>.
+          <div>This answer requires a payment of</div>
+          <strong v-text="`${item.price} ${item.currency}`"/>.
         </v-alert>
       </v-card-text>
 
