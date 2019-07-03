@@ -63,10 +63,18 @@
           justify-center
           class="px-3 mb-2"
         >
-          <div
-            class="text--secondary caption"
-            v-html="`answered ${datetimeText}`"
-          />
+          <div class="text-xs-center">
+            <div
+              class="text--secondary caption"
+              v-html="`answered ${datetimeText}`"
+            />
+
+            <div
+              v-if="isPayable && isViewable"
+              v-text="`${item.price} ${item.currency}`"
+              class="mt-1 orange--text text--darken-3 font-weight-bold"
+            />
+          </div>
         </v-layout>
 
         <div
@@ -197,8 +205,43 @@ export default {
       const { user, question } = this
       return question.user.id == user.id
     },
+    isAnswerByUser() {
+      const { user, item } = this
+      return item.user.id == user.id
+    },
 
     cardActions() {
+      const btnProps = {
+        icon: true,
+        small: true,
+        dark: true
+      }
+
+      if (this.isAnswerByUser) {
+        return [
+          {
+            icon: 'edit',
+            iconProps: {
+              small: true
+            },
+            btnProps: {
+              ...btnProps,
+              color: 'teal lighten-1'
+            }
+          },
+          {
+            icon: 'delete',
+            iconProps: {
+              small: true
+            },
+            btnProps: {
+              ...btnProps,
+              color: 'pink accent-2'
+            }
+          }
+        ]
+      }
+
       if (!this.isAsker) {
         return []
       }
@@ -210,12 +253,6 @@ export default {
         isViewable,
         isQuestionByUser
       } = this
-
-      const btnProps = {
-        icon: true,
-        small: true,
-        dark: true
-      }
 
       const actions =  [
         {

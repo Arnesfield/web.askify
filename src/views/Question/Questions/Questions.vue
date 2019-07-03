@@ -16,6 +16,7 @@
       >
         <div>
           Hey <span
+            v-if="user"
             v-text="user.fname"
             class="body-2 underline"
           />!
