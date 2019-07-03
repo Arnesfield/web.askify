@@ -13,7 +13,7 @@ const fetch = function() {
         'user',
         'tags'
       ],
-      withCount: ['answers'],
+      withCount: ['answers', 'bestAnswers'],
       where: {
         user_id: this.uid
       }

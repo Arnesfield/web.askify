@@ -24,6 +24,12 @@
           :class="answerCountClass"
           class="px-2 caption smooth-corners"
         />
+
+        <div
+          v-text="'answered'"
+          v-if="item.best_answers_count > 0"
+          class="px-2 ml-1 caption smooth-corners cyan white--text"
+        />
       </v-layout>
 
       <div

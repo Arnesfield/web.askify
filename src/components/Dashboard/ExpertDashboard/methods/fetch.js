@@ -13,7 +13,7 @@ const fetch = function() {
         'user',
         'tags'
       ],
-      withCount: ['answers']
+      withCount: ['answers', 'bestAnswers']
     },
     success: res => {
       this.items = Question.collection(res.data)
