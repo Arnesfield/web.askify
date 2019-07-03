@@ -14,7 +14,10 @@
       >
         <v-layout column>
           <div class="px-3 py-2 x-full">
-            <avatar-view v-bind="{ user }"/>
+            <avatar-view
+              v-if="user"
+              v-bind="{ user }"
+            />
           </div>
 
           <v-list
