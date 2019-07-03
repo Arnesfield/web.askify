@@ -1,3 +1,4 @@
+<!-- TODO: same with AskerDashboard huh? -->
 <template>
   <no-data-layout
     class="fill-height"
@@ -18,10 +19,7 @@
           Hey <span
             v-text="user.fname"
             class="body-2 underline"
-          />! You have asked <span
-            v-text="items.length"
-            class="body-2 underline"
-          /> {{ pluralQuestion }}. We are glad you are enjoying our platform!
+          />! Here are questions catered for you. We are glad you are enjoying our platform!
         </div>
       </v-alert>
 
@@ -38,11 +36,7 @@
 
       <v-divider/>
       <div class="pa-14 grey lighten-3">
-        <div
-          class="avoid-fab"
-        >
-          Click the <span class="body-2">add</span> icon to ask a question.
-        </div>
+        <div class="avoid-fab">No more questions.</div>
       </div>
     </v-layout>
 
@@ -50,26 +44,6 @@
       slot="no-data"
       @reload="fetch"
     />
-
-    <v-tooltip
-      left
-      slot="append"
-      open-delay="50"
-      close-delay="50"
-    >
-      <v-btn
-        fab
-        right
-        fixed
-        bottom
-        to="/ask"
-        slot="activator"
-        color="primary"
-      >
-        <v-icon class="wh-auto">add</v-icon>
-      </v-btn>
-      <span>Ask a question</span>
-    </v-tooltip>
   </no-data-layout>
 </template>
 
@@ -83,7 +57,7 @@ import NoDataLayout from '@/layouts/NoDataLayout'
 import QuestionList from '@/components/Question/QuestionList'
 
 export default {
-  name: 'asker-dashboard',
+  name: 'expert-dashboard',
   components: {
     NoDataLayout,
     QuestionList,
@@ -107,7 +81,7 @@ export default {
   },
 
   beforeCreate() {
-    app.title('My Questions')
+    app.title('Questions for you')
   },
   created() {
     this.fetch()

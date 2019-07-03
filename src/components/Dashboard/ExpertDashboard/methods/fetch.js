@@ -6,17 +6,14 @@ const fetch = function() {
   app.load(true)
 
   request({
-    url: 'questions',
+    url: `users/${this.uid}/questions/feed`,
     method: 'get',
     params: {
       with: [
         'user',
         'tags'
       ],
-      withCount: ['answers'],
-      where: {
-        user_id: this.uid
-      }
+      withCount: ['answers']
     },
     success: res => {
       this.items = Question.collection(res.data)

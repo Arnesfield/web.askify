@@ -18,10 +18,15 @@
           Hey <span
             v-text="user.fname"
             class="body-2 underline"
-          />! You can ask a question by clicking on the <strong
-            v-text="'add button'"
-            class="body-2 underline"
-          /> below.
+          />!
+          
+          <template v-if="isAsker">
+            You can ask a question by clicking on the <strong
+              v-text="'add button'"
+              class="body-2 underline"
+            /> below.
+          </template>
+          <template v-else-if="isExpert">Here are questions you can answer!</template>
         </div>
       </v-alert>
 
@@ -41,7 +46,10 @@
         <div
           class="avoid-fab"
         >
-          Click the <span class="body-2">add</span> icon to ask a question.
+          <template v-if="isAsker">
+            Click the <span class="body-2">add</span> icon to ask a question.
+          </template>
+          <template v-else-if="isExpert">No more questions.</template>
         </div>
       </div>
     </v-layout>
@@ -56,6 +64,7 @@
       slot="append"
       open-delay="50"
       close-delay="50"
+      v-if="isAsker"
     >
       <v-btn
         fab
@@ -74,7 +83,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { pluralize } from '@/utils'
 import { QuestionsNoData } from '@/components/Question/NoData'
 import * as methods from './methods'
@@ -102,7 +111,8 @@ export default {
       return pluralize(this.items, 'question', 'questions')
     },
 
-    ...mapState('auth', ['user'])
+    ...mapState('auth', ['user']),
+    ...mapGetters('auth', ['isAsker', 'isExpert'])
   },
 
   created() {

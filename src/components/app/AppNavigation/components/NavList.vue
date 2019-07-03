@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { askerList, expertList } from './list'
 import ListHelper from '@/components/utils/ListHelper'
 
 export default {
@@ -19,6 +21,15 @@ export default {
     list: []
   }),
 
+  computed: {
+    userList() {
+      const { isAsker, isExpert } = this
+      return isAsker ? askerList : (isExpert ? expertList : [])
+    },
+
+    ...mapGetters('auth', ['isAsker', 'isExpert'])
+  },
+
   created() {
     this.buildList()
   },
@@ -27,18 +38,7 @@ export default {
     buildList() {
       const list = [
         [
-          {
-            title: 'My Questions',
-            icon: 'dashboard',
-            to: '/dashboard',
-            class: ''
-          },
-          {
-            title: 'Ask a question',
-            icon: 'live_help',
-            to: '/ask',
-            class: ''
-          },
+          ...this.userList,
           {
             title: 'All Questions',
             icon: 'question_answer',

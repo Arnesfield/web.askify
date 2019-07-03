@@ -13,14 +13,12 @@
         v-bind="{ item }"
       />
 
-      <v-alert
-        :value="true"
-        color="blue"
-        class="x-full my-0"
+      <divider-text
+        center
+        class="px-3 py-4 subheading text--secondary"
       >
         {{ item.answers.length }} available {{ answersText }}
-      </v-alert>
-        
+      </divider-text>
 
       <v-divider/>
 
@@ -65,6 +63,7 @@ import { pluralize } from '@/utils'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import AnswerList from '@/components/Answer/AnswerList'
+import DividerText from '@/components/utils/DividerText'
 import { ViewQuestionNoData } from '@/components/Question/NoData'
 import QuestionDetailed from '@/components/Question/QuestionDetailed'
 
@@ -72,6 +71,7 @@ export default {
   name: 'view-question',
   components: {
     AnswerList,
+    DividerText,
     NoDataLayout,
     QuestionDetailed,
     ViewQuestionNoData
