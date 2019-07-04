@@ -14,18 +14,18 @@
     <v-layout
       column
       v-if="item"
-    >
-      <v-alert
-        color="blue"
-        dismissible
-        :value="true"
-        class="my-0 x-full alert-center"
-      >
-        <div v-if="isModeCreate">Feel free to provide professional help to askers to improve their knowledge and insights.</div>
-        <div v-else>Make sure to not change the entire gist of the answer to avoid confusion!</div>
-      </v-alert>
-      
+    > 
       <v-flex class="overflow-y-auto">
+        <v-alert
+          color="blue"
+          dismissible
+          :value="true"
+          class="my-0 x-full alert-center"
+        >
+          <div v-if="isModeCreate">Feel free to provide professional help to askers to improve their knowledge and insights.</div>
+          <div v-else>Make sure to not change the entire gist of the answer to avoid confusion!</div>
+        </v-alert>
+
         <v-form
           v-model="valid"
           class="pa-3"
