@@ -23,6 +23,7 @@ const props = directions.reduce((props, d) => {
 }, {})
 
 export default {
+  name: 'divider-text',
   props
 }
 </script>

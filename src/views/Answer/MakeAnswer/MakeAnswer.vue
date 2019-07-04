@@ -198,7 +198,7 @@ export default {
 
     // backable
     goBack() {
-      this.$router.push(`/questions/${this.questionId}`)
+      this.$router.replace(`/questions/${this.questionId}`)
     }
   }
 }

@@ -79,7 +79,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import { backable } from '@/mixins'
 import { questionsPath } from '@/utils/path'
 import TagList from '@/components/Tag/TagList'
 import EasyBtn from '@/components/utils/EasyBtn'
@@ -87,7 +86,6 @@ import AvatarView from '@/components/User/AvatarView'
 
 export default {
   name: 'question-detailed',
-  mixins: [backable],
   components: {
     EasyBtn,
     TagList,

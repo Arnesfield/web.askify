@@ -60,6 +60,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { pluralize } from '@/utils'
+import { backable } from '@/mixins'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import AnswerList from '@/components/Answer/AnswerList'
@@ -69,6 +70,7 @@ import QuestionDetailed from '@/components/Question/QuestionDetailed'
 
 export default {
   name: 'view-question',
+  mixins: [backable],
   components: {
     AnswerList,
     DividerText,
