@@ -108,7 +108,7 @@ const formRules = function(rule, args, msg) {
   // args becomes msg if msg is empty
   if (typeof msg === 'undefined') {
     // if args is empty, msg is default
-    msg = args ? args : RULES[rule].msg
+    msg = typeof args === 'string' ? args : RULES[rule].msg
     // once args has been transfered to msg,
     // assert that args is never used
     // args = args ? args : null

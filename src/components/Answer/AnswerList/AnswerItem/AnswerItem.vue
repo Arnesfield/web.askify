@@ -218,6 +218,8 @@ export default {
       }
 
       if (this.isAnswerByUser) {
+        const { question, item } = this
+
         return [
           {
             icon: 'edit',
@@ -226,7 +228,8 @@ export default {
             },
             btnProps: {
               ...btnProps,
-              color: 'teal lighten-1'
+              color: 'teal lighten-1',
+              to: `/questions/${question.id}/answer/${item.id}`
             }
           },
           {

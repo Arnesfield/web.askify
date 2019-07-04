@@ -10,6 +10,8 @@ const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dash
 const Questions = () => import(/* webpackChunkName: "questions" */ '@/views/Question/Questions')
 const MakeQuestion = () => import(/* webpackChunkName: "make-question" */ '@/views/Question/MakeQuestion')
 const ViewQuestion = () => import(/* webpackChunkName: "view-question" */ '@/views/Question/ViewQuestion')
+// answer
+const MakeAnswer = () => import(/* webpackChunkName: "make-answer" */ '@/views/Answer/MakeAnswer')
 
 export default [
   {
@@ -72,7 +74,7 @@ export default [
         },
         meta: {
           auth: [3],
-          title: 'Update a question'
+          title: 'Update question'
         }
       },
 
@@ -94,7 +96,36 @@ export default [
           auth: [1, 2, 3, 4],
           title: 'View question'
         }
+      },
+
+      //! answer
+
+      // make answer
+      {
+        path: '/questions/:qid/answer',
+        name: 'create-answer',
+        component: MakeAnswer,
+        props: {
+          mode: 'create'
+        },
+        meta: {
+          auth: [4],
+          title: 'Answer question'
+        }
+      },
+      {
+        path: '/questions/:qid/answer/:aid',
+        name: 'update-answer',
+        component: MakeAnswer,
+        props: {
+          mode: 'update'
+        },
+        meta: {
+          auth: [4],
+          title: 'Update answer'
+        }
       }
     ]
   }
+
 ]
