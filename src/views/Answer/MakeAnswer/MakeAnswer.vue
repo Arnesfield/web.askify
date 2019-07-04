@@ -56,7 +56,7 @@
                 label="Price"
                 v-model="item.price"
                 prepend-icon="monetization_on"
-                :rules="[ $vRule('min', 0.01), $vRule('max', 10) ]"
+                :rules="[ $vRule('min', 0.01), $vRule('max', 10), $vRule('decimals', 2) ]"
               />
             </div>
           </v-slide-y-reverse-transition>

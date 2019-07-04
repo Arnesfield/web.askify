@@ -12,6 +12,11 @@
 // with args, custom message
 // $vRule('required', args, 'This field is required!')
 
+const countDecimals = function(n) {
+  if (Math.floor(n) === n) return 0
+  return n.toString().split('.')[1].length || 0
+}
+
 const RULES = {
   required: {
     msg: 'This field is required.',
@@ -40,6 +45,11 @@ const RULES = {
   max: {
     msg: 'Maximum is ',
     rule: (msg, max) => e => (e !== null && e <= max) || msg + max + '.'
+  },
+
+  decimals: {
+    msg: 'Number of decimals required is ',
+    rule: (msg, d) => e => (e !== null && countDecimals(e) <= d) || msg + d + '.'
   },
 
   email: {
