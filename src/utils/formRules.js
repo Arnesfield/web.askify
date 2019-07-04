@@ -14,7 +14,8 @@
 
 const countDecimals = function(n) {
   if (Math.floor(n) === n) return 0
-  return n.toString().split('.')[1].length || 0
+  const decimals = n.toString().split('.')[1] || ''
+  return decimals.length || 0
 }
 
 const RULES = {
