@@ -1,8 +1,8 @@
 <template>
   <no-data-layout
-    class="fill-height"
     v-bind="{ hasData }"
     :class="{ 'pa-0': hasData }"
+    class="fill-height max-h no-toolbar"
   >
     <update-question-no-data
       slot="no-data"

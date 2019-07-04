@@ -1,8 +1,8 @@
 <template>
   <no-data-layout
-    class="fill-height"
     v-bind="{ hasData }"
     :class="{ 'pa-0': hasData }"
+    class="fill-height max-h no-toolbar"
   >
     <make-answer-no-data
       slot="no-data"
@@ -61,6 +61,20 @@
             </div>
           </v-slide-y-reverse-transition>
         </v-form>
+
+        <!-- question -->
+        <divider-text
+          center
+          class="px-3 py-4 subheading text--secondary text-xs-center"
+        >
+          <div style="max-width: 70%">Answer the question below</div>
+        </divider-text>
+
+        <question-detailed
+          class="mb-4"
+          v-if="question"
+          :item="question"
+        />
       </v-flex>
 
       <v-divider/>
@@ -94,13 +108,17 @@ import { backable, makeable } from '@/mixins'
 import { formRulesMixin } from '@/utils/formRules'
 import { MakeAnswerNoData } from '@/components/Answer/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
+import DividerText from '@/components/utils/DividerText'
+import QuestionDetailed from '@/components/Question/QuestionDetailed'
 
 export default {
   name: 'make-answer',
   mixins: [backable, makeable, formRulesMixin],
   components: {
+    DividerText,
     NoDataLayout,
-    MakeAnswerNoData
+    MakeAnswerNoData,
+    QuestionDetailed
   },
 
   data: () => ({
@@ -176,6 +194,11 @@ export default {
     fetch() {
       // fetch question first then fetch answer
       this.fetchQuestion()
+    },
+
+    // backable
+    goBack() {
+      this.$router.push(`/questions/${this.questionId}`)
     }
   }
 }

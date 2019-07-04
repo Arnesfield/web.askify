@@ -7,6 +7,16 @@
   background: none !important;
 }
 
+.max-h {
+  // transition-duration: 0ms;
+  // transition-property: max-height;
+  max-height: calc(100vh);
+
+  &.no-toolbar {
+    max-height: calc(100vh - 58px);
+  }
+}
+
 .dim {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }

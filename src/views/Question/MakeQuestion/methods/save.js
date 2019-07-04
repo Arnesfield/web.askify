@@ -15,7 +15,7 @@ export default function() {
       snackbar(text)
 
       // go back
-      this.$router.push('/')
+      this.$router.push(`/questions/${res.data.id}`)
     },
     error: e => {
       const text = getMessage(e.response, 'Unable to save question.')

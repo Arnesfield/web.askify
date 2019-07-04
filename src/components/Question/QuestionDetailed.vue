@@ -42,6 +42,17 @@
       </div>
     </v-card-text>
 
+    <v-card-actions
+      v-if="cardActions.length > 0"
+      class="pt-0 px-3 justify-center"
+    >
+      <easy-btn
+        :key="i"
+        v-bind="action"
+        v-for="(action, i) in cardActions"
+      />
+    </v-card-actions>
+
     <v-divider class="mx-2"/>
 
     <v-list
@@ -67,15 +78,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { backable } from '@/mixins'
 import { questionsPath } from '@/utils/path'
 import TagList from '@/components/Tag/TagList'
+import EasyBtn from '@/components/utils/EasyBtn'
 import AvatarView from '@/components/User/AvatarView'
 
 export default {
   name: 'question-detailed',
   mixins: [backable],
   components: {
+    EasyBtn,
     TagList,
     AvatarView
   },
@@ -92,6 +106,13 @@ export default {
   },
 
   computed: {
+    ...mapState('auth', ['user']),
+
+    isQuestionByUser() {
+      const { user, item } = this
+      return item.user.id == user.id
+    },
+
     imgSrc() {
       const { img } = this.item
       return img ? `${questionsPath}${img}` : null
@@ -105,6 +126,44 @@ export default {
       } = this.item
 
       return c === u ? null : ui.common
+    },
+
+    cardActions() {
+      if (!this.isQuestionByUser) {
+        return []
+      }
+
+      const btnProps = {
+        icon: true,
+        small: true,
+        dark: true
+      }
+
+      const { item } = this
+
+      return [
+        {
+          icon: 'edit',
+          iconProps: {
+            small: true
+          },
+          btnProps: {
+            ...btnProps,
+            color: 'teal lighten-1',
+            to: `/ask/${item.id}`
+          }
+        },
+        {
+          icon: 'delete',
+          iconProps: {
+            small: true
+          },
+          btnProps: {
+            ...btnProps,
+            color: 'pink accent-2'
+          }
+        }
+      ]
     }
   }
 }

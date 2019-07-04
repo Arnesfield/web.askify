@@ -99,25 +99,11 @@
         v-if="cardActions.length > 0"
         class="pt-0 px-3 justify-center"
       >
-        <v-btn
+        <easy-btn
           :key="i"
-          v-bind="action.btnProps"
+          v-bind="action"
           v-for="(action, i) in cardActions"
-          @click="actionClick(action.click, $event)"
-        >
-          <v-icon
-            v-if="action.icon"
-            v-bind="action.iconProps"
-          >
-            {{ action.icon }}
-          </v-icon>
-
-          <span
-            class="ml-2"
-            v-if="action.text"
-            v-text="action.text"
-          />
-        </v-btn>
+        />
       </v-card-actions>
 
       <v-divider class="mx-2"/>
@@ -153,12 +139,14 @@ import { app, gotoPayment } from '@/helpers'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import mixins from './mixins'
 import * as methods from './methods'
+import EasyBtn from '@/components/utils/EasyBtn'
 import AvatarView from '@/components/User/AvatarView'
 
 export default {
   name: 'answer-item',
   mixins: [...mixins],
   components: {
+    EasyBtn,
     AvatarView,
     NoDataLayout
   },
@@ -324,10 +312,6 @@ export default {
 
     fetchAll() {
       this.$emit('fetch-all')
-    },
-
-    actionClick(click, e) {
-      typeof click === 'function' ? click(e) : undefined
     }
   }
 }
