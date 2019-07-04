@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    v-bind="itemProps"
-    class="elevation-1"
-  >
+  <v-card v-bind="itemProps">
     <v-card-title
       primary-title
       class="title"
@@ -58,6 +55,7 @@
     <v-list
       dense
       two-line
+      class="transparent"
     >
       <v-list-tile>
         <v-list-tile-avatar>

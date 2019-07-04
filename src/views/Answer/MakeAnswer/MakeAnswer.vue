@@ -28,7 +28,7 @@
 
         <v-form
           v-model="valid"
-          class="pa-3"
+          class="pa-3 mb-5"
         >
           <v-textarea
             outline
@@ -71,9 +71,9 @@
         </divider-text>
 
         <question-detailed
-          class="mb-4"
           v-if="question"
           :item="question"
+          class="mb-4 grey lighten-5"
         />
       </v-flex>
 
