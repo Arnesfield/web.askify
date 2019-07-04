@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    style="max-height: 100vh"
-    class="y-full transparent elevation-0"
-  >
+  <v-card class="y-full transparent elevation-0 max-h">
     <v-layout
       column
       class="y-full"

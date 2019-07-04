@@ -8,8 +8,8 @@
 }
 
 .max-h {
-  // transition-duration: 0ms;
-  // transition-property: max-height;
+  transition-duration: 0ms;
+  transition-property: max-height;
   max-height: calc(100vh);
 
   &.no-toolbar {
