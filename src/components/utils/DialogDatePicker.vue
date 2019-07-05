@@ -80,17 +80,18 @@ export default {
   watch: {
     dialog(dialog) {
       // on open, reset dates if there is no value
-      if (dialog && !this.value) {
-        this.setDates()
+      if (dialog) {
+        const { value: v } = this
+        this.setDates(v || undefined)
       }
     }
   },
 
   methods: {
-    setDates() {
-      const d = currDate()
+    setDates(d) {
+      d = d || currDate()
       this.date = d
-      this.minDate = d
+      this.minDate = currDate()
     },
 
     onOk() {

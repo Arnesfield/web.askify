@@ -6,10 +6,13 @@ export default function() {
     return
   }
 
+  const { isUrgent } = this
+  const data = this.item.toFormData({ isUrgent })
+
   app.load()
   request({
     ...this.requestProps,
-    data: this.item.toFormData(),
+    data,
     success: res => {
       const text = getMessage(res, 'Question saved.')
       snackbar(text)

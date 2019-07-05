@@ -68,9 +68,12 @@
 
           <v-slide-y-reverse-transition>
             <div v-if="isUrgent">
-              <v-subheader>
+              <divider-text
+                center
+                class="py-4 font-italic text-xs-center"
+              >
                 Your question will be marked as&nbsp;<strong class="underline">urgent</strong>.
-              </v-subheader>
+              </divider-text>
 
               <dialog-date-picker
                 close-on-ok
@@ -147,6 +150,7 @@ import { formRulesMixin } from '@/utils/formRules'
 import { UpdateQuestionNoData } from '@/components/Question/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import TagsInput from '@/components/Tag/TagsInput'
+import DividerText from '@/components/utils/DividerText'
 import DialogDatePicker from '@/components/utils/DialogDatePicker'
 import DialogTimePicker from '@/components/utils/DialogTimePicker'
 
@@ -155,6 +159,7 @@ export default {
   mixins: [backable, makeable, formRulesMixin],
   components: {
     TagsInput,
+    DividerText,
     NoDataLayout,
     DialogDatePicker,
     DialogTimePicker,
@@ -243,7 +248,7 @@ export default {
       }
     },
     setDatetimeToItem(dt) {
-      const d = `${dt.date || ''} ${dt.time || ''}:00`
+      const d = `${dt.date || ''} ${dt.time || ''}`
       this.$set(this.item, 'urgent_at', d)
     }
   }

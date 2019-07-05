@@ -78,15 +78,16 @@ export default {
   watch: {
     dialog(dialog) {
       // on open, reset time if there is no value
-      if (dialog && !this.value) {
-        this.setTime()
+      if (dialog) {
+        const { value: v } = this
+        this.setTime(v || undefined)
       }
     }
   },
 
   methods: {
-    setTime() {
-      this.time = currTime()
+    setTime(t) {
+      this.time = t || currTime()
     },
 
     onOk() {
