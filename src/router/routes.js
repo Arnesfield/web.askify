@@ -6,6 +6,8 @@ const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
 
 // app
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard')
+// profile
+const ViewProfile = () => import(/* webpackChunkName: "view-profile" */ '@/views/Profile/ViewProfile')
 // question
 const Questions = () => import(/* webpackChunkName: "questions" */ '@/views/Question/Questions')
 const MakeQuestion = () => import(/* webpackChunkName: "make-question" */ '@/views/Question/MakeQuestion')
@@ -123,6 +125,19 @@ export default [
         meta: {
           auth: [4],
           title: 'Update answer'
+        }
+      },
+
+      //! profile
+
+      // view profile
+      {
+        path: '/profile/:id',
+        name: 'view-profile',
+        component: ViewProfile,
+        meta: {
+          auth: [1, 2, 3, 4],
+          title: 'Account Profile'
         }
       }
     ]
