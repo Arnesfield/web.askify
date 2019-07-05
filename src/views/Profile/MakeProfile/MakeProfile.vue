@@ -74,7 +74,8 @@ export default {
     },
 
     isMe() {
-      return this.user.id == this.userId
+      const { id } = this.user || {}
+      return id == this.userId
     },
 
     requestProps() {
@@ -86,7 +87,7 @@ export default {
         },
         update: {
           method: 'patch',
-          url: `users/${this.answerId}`
+          url: `users/${this.userId}`
         }
       }
 
@@ -119,7 +120,16 @@ export default {
   },
 
   methods: {
-    ...methods
+    ...methods,
+
+    goBack() {
+      const { userId } = this
+      if (userId) {
+        this.$router.replace(`/profile/${userId}`)
+      } else {
+        this.$router.replace('/')
+      }
+    }
   }
 }
 </script>

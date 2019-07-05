@@ -6,7 +6,7 @@ export default function() {
     return
   }
 
-  const data = this.item.toFormData({ props: {} })
+  const data = this.item.toFormData({ props: [] })
 
   // add password and such here
 
@@ -19,7 +19,11 @@ export default function() {
       snackbar(text)
 
       // go to
-      this.$router.push('/')
+      if (this.isModeUpdate) {
+        this.$router.push(`/profile/${res.data.id}`)
+      } else {
+        this.$router.push('/')
+      }
     },
     error: e => {
       const text = getMessage(e.response, 'Unable to save user.')

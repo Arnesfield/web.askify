@@ -1,4 +1,5 @@
 import { ls } from '@/utils'
+import { User } from '@/entities'
 import { isAuth } from '@/helpers'
 import { request, callback } from '@/api/request'
 import { AUTH_ID_KEY, AUTH_USER_KEY } from '@/keys'
@@ -46,7 +47,7 @@ export default {
         method: 'post',
         success: res => {
           // save user
-          const { user } = res.data || {}
+          const { user } = new User(res.data || {})
 
           commit('setUser', user || null)
           commit('setUid', user ? user.id : null)
@@ -67,7 +68,7 @@ export default {
         },
         success: res => {
           // save user
-          const user = res.data
+          const user = new User(res.data)
 
           commit('setUser', user)
           commit('setUid', user ? user.id : null)
