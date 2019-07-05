@@ -42,6 +42,11 @@
       </div>
     </v-card-text>
 
+    <urgent-chip
+      class="mb-3"
+      :text="item.urgent_at_common"
+    />
+
     <v-card-actions
       v-if="cardActions.length > 0"
       class="pt-0 px-3 justify-center"
@@ -102,6 +107,7 @@ import * as methods from './methods'
 import TagList from '@/components/Tag/TagList'
 import EasyBtn from '@/components/utils/EasyBtn'
 import AvatarView from '@/components/User/AvatarView'
+import UrgentChip from '@/components/Question/UrgentChip'
 import DeleteDialog from '@/components/utils/dialogs/DeleteDialog'
 
 export default {
@@ -110,6 +116,7 @@ export default {
     EasyBtn,
     TagList,
     AvatarView,
+    UrgentChip,
     DeleteDialog
   },
   props: {

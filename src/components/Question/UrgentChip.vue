@@ -1,7 +1,6 @@
 <template>
   <v-layout
     row
-    class="my-3"
     justify-center
     v-if="text"
   >

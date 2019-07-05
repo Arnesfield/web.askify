@@ -37,7 +37,10 @@
         v-html="item.title"
       />
 
-      <urgent-chip :text="item.urgent_at_common"/>
+      <urgent-chip
+        class="my-3"
+        :text="item.urgent_at_common"
+      />
 
       <v-layout
         row
