@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete
+  <v-combobox
     ref="select"
     hide-no-data
     return-object
@@ -29,7 +29,7 @@
         v-bind="{ item }"
       />
     </template>
-  </v-autocomplete>
+  </v-combobox>
 </template>
 
 <script>

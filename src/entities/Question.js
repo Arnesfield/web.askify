@@ -21,7 +21,9 @@ export default class Question extends Entity {
     addFileToRequest(data, fimg || img, 'file_img_src', 'img_src')
 
     if (tags) {
-      const tagIds = tags.map(tag => tag.id)
+      const tagIds = tags.map(
+        tag => typeof tag === 'string' ? tag : tag.id
+      )
       addArrayToRequest(data, 'tags', tagIds)
     }
 
