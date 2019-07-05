@@ -211,7 +211,7 @@ export default {
     ...methods,
 
     setDatetimeFromItem(item) {
-      const { created_at: u } = item || {}
+      const { urgent_at: u } = item || {}
       if (u) {
         // if has
         this.isUrgent = true
