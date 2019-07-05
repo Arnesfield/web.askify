@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { app } from '@/helpers'
 import { askerList, expertList } from './list'
 import ListHelper from '@/components/utils/ListHelper'
@@ -28,6 +28,7 @@ export default {
       return isAsker ? askerList : (isExpert ? expertList : [])
     },
 
+    ...mapState('auth', ['user']),
     ...mapGetters('auth', ['isAsker', 'isExpert'])
   },
 
@@ -49,7 +50,7 @@ export default {
           {
             title: 'Profile',
             icon: 'account_circle',
-            to: '/test',
+            to: `/profile/${this.user.id}`,
             class: ''
           },
           '_',

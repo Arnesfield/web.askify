@@ -7,7 +7,7 @@ const fetch = function() {
     url: `users/${this.userId}`,
     method: 'get',
     params: {
-      with: ['tags']
+      with: ['roles', 'tags']
     },
     success: res => {
       this.item = res.data
