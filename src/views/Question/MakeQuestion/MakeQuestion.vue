@@ -75,7 +75,7 @@
               <dialog-date-picker
                 close-on-ok
                 v-model="urgentVal.date"
-                :dialog.sync="dialogUrgent"
+                :dialog.sync="dialogUrgent.date"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
@@ -84,14 +84,31 @@
                     clearable
                     color="accent"
                     prepend-icon="event"
-                    label="Select date needed"
+                    label="Select date urgency"
                     v-model="urgentVal.date"
                     :rules="[$vRule('required')]"
                   />
                 </template>
               </dialog-date-picker>
 
-              <!-- TODO: time picker -->
+              <dialog-time-picker
+                close-on-ok
+                v-model="urgentVal.time"
+                :dialog.sync="dialogUrgent.time"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-on="on"
+                    readonly
+                    clearable
+                    color="accent"
+                    prepend-icon="access_time"
+                    label="Select time"
+                    v-model="urgentVal.time"
+                    :rules="[$vRule('required')]"
+                  />
+                </template>
+              </dialog-time-picker>
             </div>
           </v-slide-y-reverse-transition>
         </v-form>
@@ -131,6 +148,7 @@ import { UpdateQuestionNoData } from '@/components/Question/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import TagsInput from '@/components/Tag/TagsInput'
 import DialogDatePicker from '@/components/utils/DialogDatePicker'
+import DialogTimePicker from '@/components/utils/DialogTimePicker'
 
 export default {
   name: 'make-question',
@@ -139,6 +157,7 @@ export default {
     TagsInput,
     NoDataLayout,
     DialogDatePicker,
+    DialogTimePicker,
     UpdateQuestionNoData
   },
 
@@ -146,7 +165,10 @@ export default {
     item: null,
     valid: false,
     isUrgent: false,
-    dialogUrgent: false,
+    dialogUrgent: {
+      date: false,
+      time: false
+    },
     urgentVal: {
       date: '',
       time: ''
@@ -221,7 +243,7 @@ export default {
       }
     },
     setDatetimeToItem(dt) {
-      const d = `${dt.date || ''} ${dt.time || ''}`
+      const d = `${dt.date || ''} ${dt.time || ''}:00`
       this.$set(this.item, 'urgent_at', d)
     }
   }

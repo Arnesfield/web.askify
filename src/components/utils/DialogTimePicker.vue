@@ -16,10 +16,9 @@
       />
     </template>
 
-    <v-date-picker
+    <v-time-picker
       scrollable
-      v-model="date"
-      :min="minDate"
+      v-model="time"
     >
       <v-spacer/>
 
@@ -28,17 +27,17 @@
         v-bind="action"
         v-for="(action, i) in actions"
       />
-    </v-date-picker>
+    </v-time-picker>
   </v-dialog>
 </template>
 
 <script>
 import EasyBtn from './EasyBtn'
 
-const currDate = () => new Date().toISOString().substr(0, 10)
+const currTime = () => new Date().toTimeString().substr(0, 8)
 
 export default {
-  name: 'dialog-date-picker',
+  name: 'dialog-time-picker',
   components: {
     EasyBtn
   },
@@ -52,8 +51,7 @@ export default {
   },
 
   data: () => ({
-    date: null,
-    minDate: null
+    time: null
   }),
 
   computed: {
@@ -79,22 +77,20 @@ export default {
 
   watch: {
     dialog(dialog) {
-      // on open, reset dates if there is no value
+      // on open, reset time if there is no value
       if (dialog && !this.value) {
-        this.setDates()
+        this.setTime()
       }
     }
   },
 
   methods: {
-    setDates() {
-      const d = currDate()
-      this.date = d
-      this.minDate = d
+    setTime() {
+      this.time = currTime()
     },
 
     onOk() {
-      this.$emit('input', this.date)
+      this.$emit('input', this.time)
       if (this.closeOnOk) {
         this.$emit('update:dialog', false)
       }
