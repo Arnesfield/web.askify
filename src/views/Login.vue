@@ -141,7 +141,7 @@ export default {
       }
 
       const data = {
-        with: ['roles'],
+        with: ['roles', 'tags'],
         email: this.email,
         password: this.password
       }

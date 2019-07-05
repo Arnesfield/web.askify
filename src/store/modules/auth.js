@@ -64,7 +64,7 @@ export default {
         method: 'get',
         params: {
           authId: state.uid,
-          authWith: ['roles']
+          authWith: ['roles', 'tags']
         },
         success: res => {
           // save user
