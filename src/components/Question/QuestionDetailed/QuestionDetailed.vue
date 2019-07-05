@@ -57,7 +57,15 @@
       two-line
       class="transparent"
     >
-      <v-list-tile>
+      <v-list-tile
+        ripple
+        :to="{
+          path: `/profile/${item.user.id}`,
+          query: {
+            from: $route.fullPath
+          }
+        }"
+      >
         <v-list-tile-avatar>
           <avatar-view
             :user="item.user"
