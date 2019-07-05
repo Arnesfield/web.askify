@@ -6,24 +6,23 @@ export default function() {
     return
   }
 
-  const { isPrivate, questionId: qid } = this
+  const data = this.item.toFormData({ props: {} })
 
-  const data = this.item.toFormData({ isPrivate })
-  data.append('question_id', qid)
+  // add password and such here
 
   app.load()
   request({
     ...this.requestProps,
     data,
     success: res => {
-      const text = getMessage(res, 'Answer saved.')
+      const text = getMessage(res, 'User saved.')
       snackbar(text)
 
-      // go to question!!
-      this.$router.push(`/questions/${qid}`)
+      // go to
+      this.$router.push('/')
     },
     error: e => {
-      const text = getMessage(e.response, 'Unable to save answer.')
+      const text = getMessage(e.response, 'Unable to save user.')
       snackbar(text)
     },
     lastly: () => {

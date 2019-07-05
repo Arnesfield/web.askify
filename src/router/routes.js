@@ -7,6 +7,7 @@ const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
 // app
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard')
 // profile
+const MakeProfile = () => import(/* webpackChunkName: "make-profile" */ '@/views/Profile/MakeProfile')
 const ViewProfile = () => import(/* webpackChunkName: "view-profile" */ '@/views/Profile/ViewProfile')
 // question
 const Questions = () => import(/* webpackChunkName: "questions" */ '@/views/Question/Questions')
@@ -129,6 +130,20 @@ export default [
       },
 
       //! profile
+
+      // make profile
+      {
+        path: '/profile/edit',
+        name: 'update-profile',
+        component: MakeProfile,
+        props: {
+          mode: 'update'
+        },
+        meta: {
+          auth: [1, 2, 3, 4],
+          title: 'Update Profile'
+        }
+      },
 
       // view profile
       {

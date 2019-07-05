@@ -1,5 +1,6 @@
 import request from '@/api'
 import { app } from '@/helpers'
+import { User } from '@/entities'
 
 const fetch = function() {
   app.load()
@@ -10,7 +11,7 @@ const fetch = function() {
       with: ['roles', 'tags']
     },
     success: res => {
-      this.item = res.data
+      this.item = new User(res.data)
     },
     lastly: () => {
       app.load(false)
