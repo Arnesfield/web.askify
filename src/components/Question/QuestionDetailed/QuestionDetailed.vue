@@ -16,7 +16,10 @@
     <v-divider class="mx-2"/>
 
     <v-card-text>
-      <div v-html="item.content"/>
+      <div
+        class="text-output"
+        v-html="item.content"
+      />
 
       <v-img
         v-if="imgSrc"

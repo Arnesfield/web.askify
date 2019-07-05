@@ -37,6 +37,8 @@
         v-html="item.title"
       />
 
+      <urgent-chip :text="item.urgent_at_common"/>
+
       <v-layout
         row
         align-center
@@ -66,12 +68,14 @@
 import { pluralize } from '@/utils'
 import TagList from '@/components/Tag/TagList'
 import AvatarView from '@/components/User/AvatarView'
+import UrgentChip from '@/components/Question/UrgentChip'
 
 export default {
   name: 'question-item',
   components: {
     TagList,
-    AvatarView
+    AvatarView,
+    UrgentChip
   },
   props: {
     item: {
