@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    lazy
     :persistent="loading"
     transition="dialog-transition"
     v-bind="{ value, ...dialogProps }"

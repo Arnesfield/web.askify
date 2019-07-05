@@ -30,6 +30,9 @@ export default {
 
       return {
         ...this.dialogProps,
+        dialogProps: {
+          width: 320
+        },
         btns: [
           {
             text: 'Delete',

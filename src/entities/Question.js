@@ -3,7 +3,7 @@ import Answer from './Answer'
 import { makeFormData } from '@/helpers'
 import { addArrayToRequest, addFileToRequest } from '@/api'
 
-const props = ['title', 'content']
+const props = ['title', 'content', 'urgent_at']
 
 export default class Question extends Entity {
   constructor() {

@@ -59,6 +59,41 @@
               }
             }"
           />
+
+          <v-switch
+            ripple
+            v-model="isUrgent"
+            label="Set urgent date"
+          />
+
+          <v-slide-y-reverse-transition>
+            <div v-if="isUrgent">
+              <v-subheader>
+                Your question will be marked as&nbsp;<strong class="underline">urgent</strong>.
+              </v-subheader>
+
+              <dialog-date-picker
+                close-on-ok
+                v-model="urgentVal.date"
+                :dialog.sync="dialogUrgent"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-on="on"
+                    readonly
+                    clearable
+                    color="accent"
+                    prepend-icon="event"
+                    label="Select date needed"
+                    v-model="urgentVal.date"
+                    :rules="[$vRule('required')]"
+                  />
+                </template>
+              </dialog-date-picker>
+
+              <!-- TODO: time picker -->
+            </div>
+          </v-slide-y-reverse-transition>
         </v-form>
       </v-flex>
 
@@ -95,6 +130,7 @@ import { formRulesMixin } from '@/utils/formRules'
 import { UpdateQuestionNoData } from '@/components/Question/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import TagsInput from '@/components/Tag/TagsInput'
+import DialogDatePicker from '@/components/utils/DialogDatePicker'
 
 export default {
   name: 'make-question',
@@ -102,12 +138,19 @@ export default {
   components: {
     TagsInput,
     NoDataLayout,
+    DialogDatePicker,
     UpdateQuestionNoData
   },
 
   data: () => ({
     item: null,
-    valid: false
+    valid: false,
+    isUrgent: false,
+    dialogUrgent: false,
+    urgentVal: {
+      date: '',
+      time: ''
+    }
   }),
 
   computed: {
@@ -152,12 +195,35 @@ export default {
     ...mapState(['loading'])
   },
 
+  watch: {
+    item: 'setDatetimeFromItem',
+    urgentVal: {
+      deep: true,
+      handler: 'setDatetimeToItem'
+    }
+  },
+
   created() {
     this.fetch()
   },
 
   methods: {
-    ...methods
+    ...methods,
+
+    setDatetimeFromItem(item) {
+      const { created_at: u } = item || {}
+      if (u) {
+        // if has
+        this.isUrgent = true
+        const dt = u.split(' ')
+        this.urgentVal.date = dt[0]
+        this.urgentVal.time = dt[1]
+      }
+    },
+    setDatetimeToItem(dt) {
+      const d = `${dt.date || ''} ${dt.time || ''}`
+      this.$set(this.item, 'urgent_at', d)
+    }
   }
 }
 </script>
