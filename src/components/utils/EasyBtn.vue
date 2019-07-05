@@ -12,9 +12,9 @@
       </v-icon>
 
       <span
-        class="ml-2"
         v-if="text"
         v-text="text"
+        :class="{ 'ml-2': !!icon }"
       />
     </slot>
   </v-btn>

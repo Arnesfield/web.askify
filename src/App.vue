@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { snackbar } from '@/helpers'
+import { app, snackbar } from '@/helpers'
 import AppSnackbar from '@/components/app/AppSnackbar'
 
 export default {
@@ -28,6 +28,7 @@ export default {
     isAuth(e) {
       if (!e) {
         // goto login
+        app.load(false)
         this.$router.push('/login')
         snackbar('Logged out successfully.')
       }

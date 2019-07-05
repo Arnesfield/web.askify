@@ -1,6 +1,7 @@
 <template>
   <v-dialog
     :persistent="loading"
+    transition="dialog-transition"
     v-bind="{ value, ...dialogProps }"
     @input="$emit('input', $event)"
   >
@@ -35,8 +36,7 @@
             <!-- ! btnProps is not the actual props but for the EasyBtn -->
             <easy-btn
               :key="i"
-              v-for="(btn, i) in mBtns"
-              :btn-props="getBtnActualProps(btn)"
+              v-for="(btn, i) in mfBtns"
               v-bind="{
                 ...btn,
                 ...btnProps,
@@ -110,16 +110,29 @@ const EasyDialog = {
       return isArray ? btns : (btns ? [btns] : [])
     },
 
+    mfBtns() {
+      return this.mBtns.map(btn => {
+        // actual props
+        const { btnProps: props } = btn || {}
+        const newProps = { disabled: this.loading, ...props }
+
+        return {
+          ...btn,
+          btnProps: newProps
+        }
+      })
+    },
+
     clickProps() {
       return [this.open, this.load]
     }
   },
 
   methods: {
-    getBtnActualProps(ebp) {
-      const props = ebp ? ebp.btnProps : null
-      return { disabled: this.loading, ...props }
-    },
+    // getBtnActualProps(ebp) {
+    //   const props = ebp ? ebp.btnProps : null
+    //   return { disabled: this.loading, ...props }
+    // },
 
     open(b) {
       this.$emit('input', this.getBool(b))

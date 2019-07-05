@@ -37,7 +37,7 @@ export default {
               return vm.$emit('click:delete', ...arguments)
             },
             btnProps: {
-              flat: true,
+              outline: true,
               color: 'error'
             }
           }

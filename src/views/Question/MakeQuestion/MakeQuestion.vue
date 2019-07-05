@@ -52,6 +52,7 @@
           />
 
           <!-- TODO: input tags -->
+          <tags-input/>
         </v-form>
       </v-flex>
 
@@ -87,11 +88,13 @@ import { backable, makeable } from '@/mixins'
 import { formRulesMixin } from '@/utils/formRules'
 import { UpdateQuestionNoData } from '@/components/Question/NoData'
 import NoDataLayout from '@/layouts/NoDataLayout'
+import TagsInput from '@/components/Tag/TagsInput'
 
 export default {
   name: 'make-question',
   mixins: [backable, makeable, formRulesMixin],
   components: {
+    TagsInput,
     NoDataLayout,
     UpdateQuestionNoData
   },

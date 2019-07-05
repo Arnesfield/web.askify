@@ -8,6 +8,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { app } from '@/helpers'
 import { askerList, expertList } from './list'
 import ListHelper from '@/components/utils/ListHelper'
 
@@ -57,6 +58,7 @@ export default {
             icon: 'exit_to_app',
             class: '',
             click: () => {
+              app.load()
               this.$store.dispatch('auth/logout')
             }
           }
