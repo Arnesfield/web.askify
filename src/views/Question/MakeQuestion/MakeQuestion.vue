@@ -51,8 +51,14 @@
             :rules="[ $vRule('required') ]"
           />
 
-          <!-- TODO: input tags -->
-          <tags-input/>
+          <tags-input
+            v-model="item.tags"
+            :autocomplete-props="{
+              autocompleteProps: {
+                rules: [ $vRule('required', 'Should have at least 1 tag.') ]
+              }
+            }"
+          />
         </v-form>
       </v-flex>
 

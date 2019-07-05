@@ -4,14 +4,7 @@
     @input="$emit('input', $event)"
     v-bind="{ ...mAutocompleteProps, value, items }"
     :filter-props="['name']"
-  >
-    <v-chip
-      slot="selection"
-      slot-scope="{ item }"
-    >
-      {{ item.name }}
-    </v-chip>
-  </easy-autocomplete>
+  />
 </template>
 
 <script>
@@ -47,7 +40,10 @@ export default {
         label: 'Tags / Keywords',
         prependIcon: 'local_offer', // label
         multiple: true,
-        // chips: true,
+        chips: true,
+        clearable: true,
+        deletableChips: true,
+        hideSelected: true,
         ...props
       }
 
@@ -56,6 +52,10 @@ export default {
         autocompleteProps: newProps
       }
     }
+  },
+
+  created() {
+    this.fetch()
   },
 
   methods: {

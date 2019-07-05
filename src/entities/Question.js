@@ -22,7 +22,7 @@ export default class Question extends Entity {
 
     if (tags) {
       const tagIds = tags.map(tag => tag.id)
-      addArrayToRequest(data, 'tag_ids', tagIds)
+      addArrayToRequest(data, 'tags', tagIds)
     }
 
     return data
