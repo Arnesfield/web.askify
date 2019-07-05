@@ -72,22 +72,34 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
+
+    <delete-dialog
+      v-model="dialog"
+      @click:delete="doDelete"
+      :dialog-props="{
+        title: 'Delete question',
+        text: 'This action cannot be undone.'
+      }"
+    />
   </v-card>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { questionsPath } from '@/utils/path'
+import * as methods from './methods'
 import TagList from '@/components/Tag/TagList'
 import EasyBtn from '@/components/utils/EasyBtn'
 import AvatarView from '@/components/User/AvatarView'
+import DeleteDialog from '@/components/utils/dialogs/DeleteDialog'
 
 export default {
   name: 'question-detailed',
   components: {
     EasyBtn,
     TagList,
-    AvatarView
+    AvatarView,
+    DeleteDialog
   },
   props: {
     item: {
@@ -100,6 +112,10 @@ export default {
       required: false
     }
   },
+
+  data: () => ({
+    dialog: false
+  }),
 
   computed: {
     ...mapState('auth', ['user']),
@@ -151,6 +167,7 @@ export default {
         },
         {
           icon: 'delete',
+          click: this.openDialog,
           iconProps: {
             small: true
           },
@@ -160,6 +177,14 @@ export default {
           }
         }
       ]
+    }
+  },
+
+  methods: {
+    ...methods,
+
+    openDialog() {
+      this.dialog = true
     }
   }
 }

@@ -12,6 +12,12 @@ export default {
     },
     loadApp(state, load) {
       state.loading = typeof load === 'boolean' ? load : true
+    },
+    setFetchables(state, f = []) {
+      state.fetchables = f
+    },
+    runFetchables(state) {
+      state.fetchables.forEach(f => typeof f === 'function' ? f() : undefined)
     }
   }
 }

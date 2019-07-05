@@ -40,6 +40,13 @@ export default {
       default: undefined,
       validator: prop => typeof prop === 'undefined' || typeof prop === 'function'
     },
+    clickProps: {
+      type: Array,
+      required: false,
+      default() {
+        return []
+      }
+    },
     btnProps: {
       type: Object,
       default: null,
@@ -54,11 +61,11 @@ export default {
 
   methods: {
     actionClick(e) {
-      this.$emit('click', e)
+      this.$emit('click', e, ...this.clickProps)
 
       // emit other click
       if (typeof this.click === 'function') {
-        this.click(e)
+        this.click(e, ...this.clickProps)
       }
     }
   }

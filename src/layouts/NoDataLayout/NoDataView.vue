@@ -8,6 +8,7 @@
       />
       <template v-else>
         <v-progress-circular
+          class="mb-3"
           indeterminate
           v-bind="mProgress.props"
         />
@@ -132,10 +133,9 @@ export default {
         textClass: 'text--secondary mt-3'
       }
 
-      const isTrue = typeof progress === 'boolean' && progress
-      return isTrue ? props : {
-        ...props,
-        ...progress
+      return {
+        ...progress,
+        props
       }
     }
   }

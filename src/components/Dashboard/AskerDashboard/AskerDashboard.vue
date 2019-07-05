@@ -77,6 +77,7 @@
 import { mapState } from 'vuex'
 import { app } from '@/helpers'
 import { pluralize } from '@/utils'
+import { fetchable } from '@/mixins'
 import { MyQuestionsNoData } from '@/components/Question/NoData'
 import * as methods from './methods'
 import NoDataLayout from '@/layouts/NoDataLayout'
@@ -84,6 +85,7 @@ import QuestionList from '@/components/Question/QuestionList'
 
 export default {
   name: 'asker-dashboard',
+  mixins: [fetchable],
   components: {
     NoDataLayout,
     QuestionList,

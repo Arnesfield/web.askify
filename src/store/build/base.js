@@ -2,7 +2,8 @@ import { createState, createModel } from '@/store/builder'
 
 const build = {
   title: ['setTitle', null],
-  loading: ['loadApp', false]
+  loading: ['loadApp', false],
+  fetchables: ['setFetchables', []]
 }
 
 const state = createState(build)

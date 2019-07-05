@@ -11,6 +11,10 @@ const callback = (fn, e) => typeof fn === 'function' ? fn(e) : undefined
 const request = function(options = {}) {
   let { data, method, params, success, error, lastly } = options
 
+  // use custom data if not defined,
+  // if null, use null lol
+  data = typeof data === 'undefined' ? {} : data
+
   method = method || 'get'
 
   const isFormData = data instanceof FormData
