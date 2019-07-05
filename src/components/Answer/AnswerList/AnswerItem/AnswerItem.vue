@@ -129,6 +129,15 @@
         </v-list-tile>
       </v-list>
     </v-card>
+
+    <delete-dialog
+      v-model="dialog"
+      @click:delete="doDelete"
+      :dialog-props="{
+        title: 'Delete answer',
+        text: 'This action cannot be undone.'
+      }"
+    />
   </no-data-layout>
 </template>
 
@@ -141,6 +150,7 @@ import mixins from './mixins'
 import * as methods from './methods'
 import EasyBtn from '@/components/utils/EasyBtn'
 import AvatarView from '@/components/User/AvatarView'
+import DeleteDialog from '@/components/utils/dialogs/DeleteDialog'
 
 export default {
   name: 'answer-item',
@@ -148,7 +158,8 @@ export default {
   components: {
     EasyBtn,
     AvatarView,
-    NoDataLayout
+    NoDataLayout,
+    DeleteDialog
   },
   props: {
     item: {
@@ -182,6 +193,7 @@ export default {
   },
 
   data: () => ({
+    dialog: false,
     loading: false
   }),
 
@@ -222,6 +234,7 @@ export default {
           },
           {
             icon: 'delete',
+            click: this.openDialog,
             iconProps: {
               small: true
             },
@@ -299,6 +312,10 @@ export default {
 
   methods: {
     ...methods,
+
+    openDialog() {
+      this.dialog = true
+    },
 
     pay() {
       app.load()

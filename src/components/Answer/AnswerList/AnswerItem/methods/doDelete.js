@@ -9,10 +9,10 @@ export default function(e, open, load) {
   app.load()
 
   request({
-    url: `questions/${this.item.id}`,
+    url: `answers/${this.item.id}`,
     method: 'delete',
     success: res => {
-      const text = getMessage(res, 'Question removed.')
+      const text = getMessage(res, 'Answer removed.')
       snackbar({
         text,
         btns: [
@@ -30,11 +30,16 @@ export default function(e, open, load) {
         ]
       })
 
-      // go to question!!
-      this.$router.push('/')
+      // unload here first before fetching
+      app.load(false)
+      // when deleted, just fetchAll
+      this.fetchAll()
     },
     error: e => {
-      const text = getMessage(e.response, 'Unable to remove question.')
+      // unload here
+      app.load(false)
+
+      const text = getMessage(e.response, 'Unable to remove answer.')
       snackbar({
         text,
         btns: [
@@ -54,7 +59,6 @@ export default function(e, open, load) {
     },
     lastly: () => {
       load(false)
-      app.load(false)
       open(false)
     }
   })

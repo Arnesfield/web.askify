@@ -1,3 +1,5 @@
 export * from './best'
+export { default as doDelete } from './doDelete'
+export { default as doRestore } from './doRestore'
 export * from './fetch'
 export * from './vote'
