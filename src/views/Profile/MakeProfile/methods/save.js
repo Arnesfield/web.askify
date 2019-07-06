@@ -19,7 +19,15 @@ export default function() {
     return
   }
 
-  const data = this.item.toFormData({ props: [] })
+  const props = !this.changePassword
+    ? []
+    : (
+      this.isModeUpdate
+        ? ['old_password', 'password', 'passconf']
+        : ['password', 'passconf']
+    )
+
+  const data = this.item.toFormData({ props })
 
   // add password and such here
 

@@ -81,6 +81,57 @@
               }
             }"
           />
+
+          <!-- if updating, there is optional password change -->
+          <v-switch
+            ripple
+            v-if="isModeUpdate"
+            v-model="changePassword"
+            label="Click here to change password"
+          />
+
+          <v-slide-y-reverse-transition>
+            <div v-if="changePassword">
+              <divider-text
+                center
+                :class="dividerTextClass"
+              >
+                Passwords
+              </divider-text>
+
+              <password-field
+                v-if="isModeUpdate"
+                v-model="item.old_password"
+                :text-field-props="{
+                  ...passwordProps,
+                  prependIcon: 'vpn_key',
+                  label: 'Old Password'
+                }"
+              />
+
+              <password-field
+                v-model="item.password"
+                :text-field-props="{
+                  ...passwordProps,
+                  prependIcon: 'lock',
+                  label: isModeCreate ? 'Password' : 'New Password'
+                }"
+              />
+
+              <password-field
+                v-model="item.passconf"
+                :text-field-props="{
+                  ...passwordProps,
+                  prependIcon: 'lock_outline',
+                  label: 'Confirm Password',
+                  rules: [
+                    ...passwordProps.rules,
+                    $vRule('match', item.password, null)
+                  ]
+                }"
+              />
+            </div>
+          </v-slide-y-reverse-transition>
         </v-form>
       </v-flex>
 
@@ -108,6 +159,7 @@ import { User } from '@/entities'
 import { backable, makeable } from '@/mixins'
 import { formRulesMixin } from '@/utils/formRules'
 import { ViewProfileNoData } from '@/components/Profile/NoData'
+import PasswordField from '@/components/utils/PasswordField'
 import DividerText from '@/components/utils/DividerText'
 import NoDataLayout from '@/layouts/NoDataLayout'
 import TagsInput from '@/components/Tag/TagsInput'
@@ -119,12 +171,14 @@ export default {
     TagsInput,
     DividerText,
     NoDataLayout,
+    PasswordField,
     ViewProfileNoData
   },
 
   data: () => ({
     item: null,
-    valid: false
+    valid: false,
+    changePassword: false
   }),
 
   computed: {
@@ -176,7 +230,7 @@ export default {
     },
 
     dividerTextClass() {
-      return 'px-3 mb-3 my-2 subheading text--secondary text-xs-center'
+      return 'px-3 mb-3 my-2 subheading primary--text text-xs-center'
     },
 
     textFieldProps() {
@@ -184,6 +238,19 @@ export default {
         color: 'accent',
         clearable: true,
         disabled: this.loading
+      }
+    },
+
+    passwordProps() {
+      const { $vRule: r } = this
+      return {
+        required: true,
+        color: 'accent',
+        disabled: this.loading,
+        rules: [
+          r('required', 'Password is required'),
+          r('password')
+        ]
       }
     }
   },
@@ -195,6 +262,9 @@ export default {
     } else {
       this.fetch()
     }
+
+    // change password if create!
+    this.changePassword = this.isModeCreate
   },
 
   methods: {
