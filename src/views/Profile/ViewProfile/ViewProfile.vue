@@ -68,12 +68,14 @@
         </template>
       </v-list>
 
-      <tag-list
-        class="pl-3 mt-4"
-        :items="item.tags"
-        last-item-class=""
-        :layout-props="{ wrap: true }"
-      />
+      <div style="margin-bottom: 80px;">
+        <tag-list
+          class="pl-3 mt-4"
+          :items="item.tags"
+          last-item-class=""
+          :layout-props="{ wrap: true }"
+        />
+      </div>
     </v-layout>
 
     <view-profile-no-data
