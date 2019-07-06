@@ -9,10 +9,17 @@ class Mobile {
       b = [b]
     }
 
-    b.forEach(fn => typeof fn === 'function' ? fn() : undefined)
+    let didExec = false
+
+    b.forEach(fn => {
+      didExec = typeof fn === 'function'
+      didExec ? fn() : undefined
+    })
 
     // flush
     flush ? this.backables = [] : undefined
+
+    return didExec
   }
 }
 

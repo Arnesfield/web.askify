@@ -237,6 +237,11 @@ export default {
   methods: {
     ...methods,
 
+    // backable
+    goBack() {
+      this.$router.replace(`/questions/${this.questionId}`)
+    },
+
     setDatetimeFromItem(item) {
       const { urgent_at: u } = item || {}
       if (u) {
