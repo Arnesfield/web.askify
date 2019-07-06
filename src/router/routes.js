@@ -7,6 +7,8 @@ const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
 
 // app
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard')
+// forgot
+const ForgotPassword = () => import(/* webpackChunkName: "forgot-password" */ '@/views/ForgotPassword')
 // profile
 const MakeProfile = () => import(/* webpackChunkName: "make-profile" */ '@/views/Profile/MakeProfile')
 const ViewProfile = () => import(/* webpackChunkName: "view-profile" */ '@/views/Profile/ViewProfile')
@@ -54,6 +56,15 @@ export default [
         meta: {
           auth: 0,
           title: 'Create Account'
+        }
+      },
+      {
+        path: '/reset',
+        name: 'forgot-password',
+        component: ForgotPassword,
+        meta: {
+          auth: 0,
+          title: 'Forgot Password'
         }
       }
     ]

@@ -69,7 +69,7 @@
                 </v-btn>
 
                 <div class="mt-4 text-xs-left">
-                  <router-link to="/">Forgot password?</router-link>
+                  <router-link to="/reset">Forgot password?</router-link>
                 </div>
               </v-form>
             </v-card-text>
