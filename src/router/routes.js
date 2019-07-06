@@ -1,5 +1,6 @@
 import AppLayout from '@/layouts/AppLayout'
 import BasicLayout from '@/layouts/BasicLayout'
+import AppBarLayout from '@/layouts/AppBarLayout'
 
 // basic
 const Login = () => import(/* webpackChunkName: "login" */ '@/views/Login')
@@ -33,6 +34,26 @@ export default [
         meta: {
           auth: 0,
           title: 'Login'
+        }
+      }
+    ]
+  },
+
+  // appbar
+  {
+    path: '',
+    component: AppBarLayout,
+    children: [
+      {
+        path: '/register',
+        name: 'create-profile',
+        component: MakeProfile,
+        props: {
+          mode: 'create'
+        },
+        meta: {
+          auth: 0,
+          title: 'Create Account'
         }
       }
     ]

@@ -12,7 +12,7 @@
     <span
       v-html="text"
       class="px-4"
-      style="padding-top: 14px; padding-bottom: 14px; max-width: 420px"
+      style="padding-top: 14px; padding-bottom: 14px; max-width: 260px"
     />
 
     <v-layout class="pr-3">

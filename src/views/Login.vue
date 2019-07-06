@@ -80,7 +80,7 @@
       <v-divider/>
       <div class="white pa-2 text-xs-center caption">
         <span class="text--secondary">Don't have an account? <router-link
-          to="/"
+          to="/register"
           class="font-weight-bold"
         >Sign up</router-link>.</span>
       </div>

@@ -28,17 +28,31 @@
           v-model="valid"
           class="pa-3 mb-5"
         >
-          <divider-text
-            center
-            :class="dividerTextClass"
-          >
-            Name of user
-          </divider-text>
+          <template v-if="isModeCreate">
+            <divider-text v-bind="dividerTextProps">Account type</divider-text>
+
+            <v-radio-group
+              mandatory
+              v-model="accountType"
+            >
+              <v-radio
+                value="3"
+                label="Asker"
+              />
+              <v-radio
+                value="4"
+                label="Expert"
+              />
+            </v-radio-group>
+          </template>
+
+          <divider-text v-bind="dividerTextProps">Name of user</divider-text>
 
           <v-text-field
             v-model="item.fname"
             v-bind="textFieldProps"
             label="First name"
+            prepend-icon="person"
             :rules="[ $vRule('required') ]"
           />
 
@@ -46,21 +60,18 @@
             v-model="item.mname"
             v-bind="textFieldProps"
             label="Middle name"
+            prepend-icon="people_outline"
           />
 
           <v-text-field
             v-model="item.lname"
             v-bind="textFieldProps"
             label="Last name"
+            prepend-icon="people"
             :rules="[ $vRule('required') ]"
           />
 
-          <divider-text
-            center
-            :class="dividerTextClass"
-          >
-            More information
-          </divider-text>
+          <divider-text v-bind="dividerTextProps">More information</divider-text>
 
           <v-text-field
             type="email"
@@ -92,12 +103,7 @@
 
           <v-slide-y-reverse-transition>
             <div v-if="changePassword">
-              <divider-text
-                center
-                :class="dividerTextClass"
-              >
-                Passwords
-              </divider-text>
+              <divider-text v-bind="dividerTextProps">Passwords</divider-text>
 
               <password-field
                 v-if="isModeUpdate"
@@ -178,6 +184,7 @@ export default {
   data: () => ({
     item: null,
     valid: false,
+    accountType: '3',
     changePassword: false
   }),
 
@@ -229,8 +236,11 @@ export default {
       return props[this.mode][this.loading] || 'Save profile'
     },
 
-    dividerTextClass() {
-      return 'px-3 mb-3 my-2 subheading primary--text text-xs-center'
+    dividerTextProps() {
+      return {
+        center: true,
+        class: 'mb-3 my-2 subheading primary--text text-xs-center'
+      }
     },
 
     textFieldProps() {

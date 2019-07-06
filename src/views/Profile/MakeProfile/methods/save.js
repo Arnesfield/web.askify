@@ -28,6 +28,9 @@ export default function() {
     )
 
   const data = this.item.toFormData({ props })
+  if (this.isModeCreate) {
+    data.append('roles[]', this.accountType)
+  }
 
   // add password and such here
 
