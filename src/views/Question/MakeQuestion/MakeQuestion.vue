@@ -239,7 +239,11 @@ export default {
 
     // backable
     goBack() {
-      this.$router.replace(`/questions/${this.questionId}`)
+      if (this.isModeUpdate) {
+        this.$router.replace(`/questions/${this.questionId}`)
+      } else {
+        this.$router.push('/')
+      }
     },
 
     setDatetimeFromItem(item) {
