@@ -13,7 +13,11 @@ export default {
         }
       }
 
-      state.icon = icon || null
+      icon = icon || null
+      state.icon = icon
+
+      // set click globallyyy
+      window.$mobile.backables = icon ? icon.click : []
     },
     makeSearchable(state, searchable) {
       state.searchable = typeof searchable === 'boolean' ? searchable : true
