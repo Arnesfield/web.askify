@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <!-- use v-content on layouts or components -->
-    <v-slide-x-reverse-transition>
-      <router-view/>
-    </v-slide-x-reverse-transition>
+    <router-view/>
 
     <app-snackbar/>
   </v-app>
