@@ -12,12 +12,19 @@ import './assets/scss/app.scss'
 
 Vue.config.productionTip = false
 
+// show loading screen
+const preloader = document.getElementById('preloader')
+preloader.style.display = 'flex'
+
 store.dispatch('auth/me', {
   lastly: () => {
     new Vue({
       router,
       store,
-      render: h => h(App)
+      render: h => {
+        preloader.style.display = 'none'
+        return h(App)
+      }
     }).$mount('#app')
   }
 })
