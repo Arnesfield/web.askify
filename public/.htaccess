@@ -1,15 +1,15 @@
 # for dist
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
+  RewriteBase /school/askify/web.askify/dist/
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule . /school/askify/web.askify/dist/index.html [L]
 </IfModule>
 
 <Files "service-worker.js">
-  Header Set Service-Worker-allowed "/"
+  Header Set Service-Worker-allowed /school/askify/web.askify/dist/
 </Files>
 
 # use /school/askify/web.askify/dist/ as base if local
